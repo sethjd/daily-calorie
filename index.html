@@ -13,8 +13,8 @@
 
     body {
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #fef9f2;
-      color: #2e2a28;
+      background: #121212;
+      color: #eaeaea;
       padding: 0.75rem 0.5rem 1.5rem;
       min-height: 100vh;
     }
@@ -24,15 +24,14 @@
       margin: 0 auto;
     }
 
-    /* header + profile section */
+    /* header + profile section - dark mode */
     .profile-card {
-      background: #ffffffd9;
-      backdrop-filter: blur(4px);
+      background: #1e1e1e;
       padding: 1rem 1rem 1.2rem;
       border-radius: 32px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
       margin-bottom: 1.5rem;
-      border: 1px solid #fff3e6;
+      border: 1px solid #333;
     }
 
     .profile-row {
@@ -46,23 +45,24 @@
     .profile-row label {
       font-weight: 500;
       font-size: 0.9rem;
-      color: #936e5a;
+      color: #b88b6a;
       min-width: 3.5rem;
     }
 
     .profile-row input {
-      background: #fffbf5;
-      border: 1px solid #eedacb;
+      background: #2a2a2a;
+      border: 1px solid #444;
       border-radius: 40px;
       padding: 0.7rem 1rem;
       font-size: 1rem;
       width: 100%;
       max-width: 130px;
       outline: none;
+      color: #eaeaea;
     }
     .profile-row input:focus {
-      border-color: #dbb694;
-      background: #fff9f0;
+      border-color: #b88b6a;
+      background: #333;
     }
 
     .goal-row {
@@ -71,7 +71,7 @@
       align-items: center;
       gap: 0.6rem;
       margin: 0.8rem 0;
-      background: #f7efe7;
+      background: #252525;
       border-radius: 40px;
       padding: 0.7rem 1.2rem;
     }
@@ -84,25 +84,26 @@
     }
     
     .goal-btn {
-      background: white;
-      border: 1px solid #d4bbaa;
+      background: #333;
+      border: 1px solid #555;
       border-radius: 30px;
       padding: 0.4rem 1rem;
       font-size: 0.9rem;
-      color: #5f4233;
+      color: #ccc;
       flex: 1;
       min-width: 70px;
+      cursor: pointer;
     }
     
     .goal-btn.active {
-      background: #dbb99c;
-      border-color: #b45f3a;
-      color: #2f241e;
+      background: #b88b6a;
+      border-color: #d9a885;
+      color: #121212;
       font-weight: 600;
     }
 
     .target-row {
-      background: #f7efe7;
+      background: #252525;
       border-radius: 40px;
       padding: 0.7rem 1.2rem;
       display: flex;
@@ -110,17 +111,22 @@
       justify-content: space-between;
       font-size: 1.1rem;
       font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .target-row:active {
+      background: #2f2f2f;
     }
     .target-number {
-      background: white;
+      background: #333;
       padding: 0.2rem 1rem;
       border-radius: 40px;
-      color: #d26f4a;
+      color: #d9a885;
       font-weight: 600;
     }
 
     .suggestion-badge {
-      background: #e8d7cc;
+      background: #252525;
       border-radius: 30px;
       padding: 0.8rem 1.2rem;
       margin: 1rem 0 0.5rem;
@@ -128,7 +134,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      border-left: 4px solid #d26f4a;
+      border-left: 4px solid #b88b6a;
     }
     
     .suggestion-icon {
@@ -137,11 +143,11 @@
     
     .suggestion-text {
       flex: 1;
-      color: #362a22;
+      color: #ccc;
     }
     
     .suggestion-text strong {
-      color: #b45f3a;
+      color: #d9a885;
     }
 
     /* days navigation */
@@ -158,33 +164,33 @@
       display: none;
     }
     .day-btn {
-      background: #f5e9df;
+      background: #252525;
       border: none;
       border-radius: 50px;
       padding: 0.7rem 1.2rem;
       font-size: 1rem;
       font-weight: 500;
-      color: #6f4f3c;
+      color: #aaa;
       flex-shrink: 0;
       transition: 0.2s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-      border: 1px solid transparent;
+      border: 1px solid #333;
     }
     .day-btn.active {
-      background: #ffffff;
-      border-color: #e5c9b5;
-      color: #b45f3a;
+      background: #333;
+      border-color: #b88b6a;
+      color: #d9a885;
       font-weight: 600;
-      box-shadow: 0 6px 12px rgba(190, 140, 100, 0.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
 
     /* daily log panel */
     .day-panel {
-      background: white;
+      background: #1e1e1e;
       border-radius: 40px;
       padding: 1.5rem 1rem;
       margin-bottom: 1.5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      border: 1px solid #333;
     }
 
     .day-header {
@@ -196,18 +202,18 @@
     }
     .day-name {
       font-weight: 600;
-      color: #362a22;
+      color: #eaeaea;
       text-transform: capitalize;
     }
     .day-total {
-      background: #efe3d9;
+      background: #252525;
       border-radius: 40px;
       padding: 0.4rem 1.2rem;
       font-weight: 600;
-      color: #3e2e23;
+      color: #ccc;
     }
     .day-total span {
-      color: #c0653c;
+      color: #d9a885;
       margin-left: 0.3rem;
     }
     .remaining {
@@ -220,38 +226,39 @@
       color: #d26f4a;
     }
     .remaining.good {
-      color: #6b8e6b;
+      color: #8ba88b;
     }
 
     /* entry list */
     .food-entry {
       display: flex;
       align-items: center;
-      background: #fdf9f5;
+      background: #252525;
       border-radius: 60px;
       padding: 0.5rem 0.5rem 0.5rem 1rem;
       margin-bottom: 0.7rem;
-      border: 1px solid #f2e2d6;
+      border: 1px solid #3a3a3a;
     }
     .food-desc {
       flex: 1;
       font-size: 1rem;
       font-weight: 470;
+      color: #eaeaea;
     }
     .food-cals {
-      background: white;
+      background: #333;
       border-radius: 40px;
       padding: 0.3rem 0.9rem;
       margin: 0 0.3rem;
       font-weight: 500;
-      color: #7d5540;
+      color: #d9a885;
     }
     .remove-btn {
       background: none;
       border: none;
       font-size: 1.6rem;
       line-height: 1;
-      color: #c99d82;
+      color: #8b5e45;
       width: 44px;
       height: 44px;
       border-radius: 50%;
@@ -261,12 +268,12 @@
       cursor: pointer;
     }
     .remove-btn:active {
-      background: #f2e0d4;
+      background: #3a3a3a;
     }
 
     /* add section */
     .add-section {
-      background: #faf3ec;
+      background: #252525;
       border-radius: 36px;
       padding: 1rem;
       margin: 1.5rem 0 1rem;
@@ -279,31 +286,34 @@
       margin-bottom: 0.8rem;
     }
     .flex-row input {
-      background: white;
-      border: 1px solid #e2cfbf;
+      background: #1e1e1e;
+      border: 1px solid #444;
       border-radius: 60px;
       padding: 0.9rem 1.2rem;
       font-size: 1rem;
       flex: 1 1 160px;
       outline: none;
+      color: #eaeaea;
     }
     .flex-row input:focus {
-      border-color: #c8a483;
+      border-color: #b88b6a;
+      background: #2a2a2a;
     }
     .primary-btn {
-      background: #e2c1aa;
+      background: #b88b6a;
       border: none;
       border-radius: 60px;
       padding: 0.9rem 1.5rem;
       font-weight: 600;
       font-size: 1rem;
-      color: #2d221c;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      color: #121212;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       flex: 1 0 100px;
       white-space: nowrap;
+      cursor: pointer;
     }
     .primary-btn:active {
-      background: #d4af95;
+      background: #a07554;
     }
 
     /* quick picks management */
@@ -316,21 +326,22 @@
     .quick-category {
       font-size: 0.9rem;
       font-weight: 600;
-      color: #936e5a;
+      color: #b88b6a;
       letter-spacing: 0.3px;
     }
     .edit-toggle {
-      background: #e8d7cc;
+      background: #333;
       border: none;
       border-radius: 30px;
       padding: 0.4rem 1rem;
       font-size: 0.8rem;
-      color: #4a3a30;
+      color: #ccc;
       font-weight: 500;
+      cursor: pointer;
     }
     .edit-toggle.active {
-      background: #dbb99c;
-      color: #2f241e;
+      background: #b88b6a;
+      color: #121212;
     }
     
     .quick-select {
@@ -347,14 +358,14 @@
     }
     
     .quick-btn {
-      background: white;
-      border: 1px solid #e1ccbd;
+      background: #1e1e1e;
+      border: 1px solid #444;
       border-radius: 40px;
       padding: 0.7rem 1.2rem;
       font-size: 0.95rem;
       font-weight: 480;
-      color: #5f4233;
-      box-shadow: 0 2px 4px #f3e7de;
+      color: #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       transition: 0.1s;
       cursor: pointer;
       white-space: nowrap;
@@ -364,8 +375,9 @@
       padding-right: 2.2rem;
       cursor: move;
       user-select: none;
-      background: #fff9f2;
+      background: #252525;
       border-style: dashed;
+      border-color: #b88b6a;
     }
     
     .delete-quick {
@@ -374,7 +386,7 @@
       right: -4px;
       top: -4px;
       background: #d26f4a;
-      color: white;
+      color: #121212;
       border: none;
       border-radius: 50%;
       width: 24px;
@@ -384,7 +396,7 @@
       cursor: pointer;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       z-index: 2;
     }
     
@@ -402,7 +414,7 @@
       gap: 0.5rem;
       margin: 1rem 0 0.5rem;
       align-items: center;
-      background: #f0e2d6;
+      background: #333;
       padding: 0.8rem;
       border-radius: 50px;
       flex-wrap: wrap;
@@ -410,29 +422,36 @@
     
     .add-quick-row input {
       flex: 1;
-      background: white;
-      border: 1px solid #d4bbaa;
+      background: #1e1e1e;
+      border: 1px solid #555;
       border-radius: 40px;
       padding: 0.7rem 1rem;
       font-size: 0.95rem;
       min-width: 120px;
+      color: #eaeaea;
     }
     
     .add-quick-row select {
-      background: white;
-      border: 1px solid #d4bbaa;
+      background: #1e1e1e;
+      border: 1px solid #555;
       border-radius: 40px;
       padding: 0.7rem 1rem;
       font-size: 0.95rem;
+      color: #eaeaea;
     }
     
     .add-quick-row button {
-      background: #e2c1aa;
+      background: #b88b6a;
       border: none;
       border-radius: 40px;
       padding: 0.7rem 1.2rem;
       font-weight: 500;
       white-space: nowrap;
+      color: #121212;
+      cursor: pointer;
+    }
+    .add-quick-row button:active {
+      background: #a07554;
     }
     
     .category-tabs {
@@ -443,20 +462,22 @@
     }
     
     .cat-tab {
-      background: #f0e2d6;
+      background: #252525;
       border: none;
       border-radius: 30px;
       padding: 0.4rem 1rem;
       font-size: 0.8rem;
-      color: #5f4233;
+      color: #aaa;
       flex: 1;
       white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid #3a3a3a;
     }
     
     .cat-tab.active-cat {
-      background: #dbb99c;
-      font-weight: 600;
-      color: #2f241e;
+      background: #b88b6a;
+      color: #121212;
+      border-color: #d9a885;
     }
 
     /* export/import tools */
@@ -465,31 +486,35 @@
       justify-content: space-around;
       gap: 0.5rem;
       margin: 2rem 0 1rem;
-      background: #fffcf7;
+      background: #1e1e1e;
       padding: 1rem;
       border-radius: 36px;
+      border: 1px solid #333;
     }
     .sec-btn {
-      background: #f5e8de;
+      background: #252525;
       border: none;
       border-radius: 50px;
       padding: 0.7rem 1.2rem;
       font-size: 0.9rem;
       font-weight: 500;
-      color: #5b463b;
+      color: #ccc;
       flex: 1;
       text-align: center;
+      cursor: pointer;
+      border: 1px solid #444;
     }
     .sec-btn:active {
-      background: #e6d2c2;
+      background: #333;
     }
     .file-input-label {
-      background: #f5e8de;
+      background: #252525;
+      border: 1px solid #444;
       border-radius: 50px;
       padding: 0.7rem 1.2rem;
       font-size: 0.9rem;
       font-weight: 500;
-      color: #5b463b;
+      color: #ccc;
       flex: 1;
       text-align: center;
       white-space: nowrap;
@@ -502,7 +527,7 @@
 
     .small-note {
       font-size: 0.75rem;
-      color: #b29481;
+      color: #777;
       text-align: center;
       margin-top: 1rem;
     }
@@ -524,7 +549,7 @@
     
     <!-- Goal selector -->
     <div class="goal-row">
-      <span style="color:#936e5a;">🎯 goal</span>
+      <span style="color:#b88b6a;">🎯 goal</span>
       <div class="goal-selector">
         <button class="goal-btn" data-goal="lose">⬇️ lose</button>
         <button class="goal-btn active" data-goal="maintain">⚖️ maintain</button>
@@ -533,7 +558,7 @@
     </div>
     
     <!-- Daily target (can be manually set) -->
-    <div class="target-row">
+    <div class="target-row" id="targetRow">
       <span>🔥 daily target</span>
       <span class="target-number" id="targetDisplay">1950</span>
     </div>
@@ -621,11 +646,12 @@
     let quickPicks = [];
     let currentCategory = 'all';
     let editMode = false;
-    let currentGoal = 'maintain'; // 'lose', 'maintain', 'gain'
-    let manualTarget = null; // Allow manual override
+    let currentGoal = 'maintain';
+    let manualTarget = null;
 
-    // Load or initialize data
+    // Load ALL saved data
     try {
+      // Load food entries
       const stored = localStorage.getItem('gf_food_data');
       if (stored) {
         const parsed = JSON.parse(stored);
@@ -635,7 +661,7 @@
         DAYS.forEach(d => foodData[d] = []);
       }
       
-      // Load quick picks or use defaults
+      // Load quick picks
       const savedQuick = localStorage.getItem('gf_quick_picks');
       if (savedQuick) {
         quickPicks = JSON.parse(savedQuick);
@@ -663,14 +689,25 @@
         ];
       }
       
-      // Load saved goal and manual target
-      const savedGoal = localStorage.getItem('gf_current_goal');
-      if (savedGoal) currentGoal = savedGoal;
-      
-      const savedManualTarget = localStorage.getItem('gf_manual_target');
-      if (savedManualTarget) manualTarget = parseInt(savedManualTarget, 10);
+      // Load profile data (age, height, weight, goal, manual target)
+      const savedProfile = localStorage.getItem('gf_profile');
+      if (savedProfile) {
+        const profile = JSON.parse(savedProfile);
+        
+        // Set input values from saved profile
+        const ageInput = document.getElementById('ageInput');
+        const heightInput = document.getElementById('heightInput');
+        const weightInput = document.getElementById('weightInput');
+        
+        if (profile.age) ageInput.value = profile.age;
+        if (profile.height) heightInput.value = profile.height;
+        if (profile.weight) weightInput.value = profile.weight;
+        if (profile.goal) currentGoal = profile.goal;
+        if (profile.manualTarget) manualTarget = profile.manualTarget;
+      }
       
     } catch (e) {
+      console.log('Error loading data:', e);
       DAYS.forEach(d => foodData[d] = []);
       quickPicks = [];
     }
@@ -682,35 +719,41 @@
     const targetSpan = document.getElementById('targetDisplay');
     const suggestionText = document.getElementById('suggestionText');
 
+    // Save profile to localStorage
+    function saveProfile() {
+      const profile = {
+        age: ageInput.value,
+        height: heightInput.value,
+        weight: weightInput.value,
+        goal: currentGoal,
+        manualTarget: manualTarget
+      };
+      localStorage.setItem('gf_profile', JSON.stringify(profile));
+    }
+
     // Calculate BMR and target based on goal
     function computeTarget() {
       const age = parseInt(ageInput.value, 10) || 28;
       const height = parseInt(heightInput.value, 10) || 165;
       const weight = parseInt(weightInput.value, 10) || 60;
       
-      // Mifflin-St Jeor for female
       const bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-      
-      // Activity factor (lightly active)
       let maintenance = Math.round(bmr * 1.375);
       
-      // Adjust based on goal
       let target = maintenance;
       switch(currentGoal) {
         case 'lose':
-          target = Math.round(maintenance - 500); // 500 cal deficit for ~0.5kg/week
+          target = Math.round(maintenance - 500);
           break;
         case 'gain':
-          target = Math.round(maintenance + 300); // surplus for slow gain
+          target = Math.round(maintenance + 300);
           break;
-        default: // maintain
+        default:
           target = maintenance;
       }
       
-      // Safety checks
       target = Math.max(1200, Math.min(3500, target));
       
-      // Allow manual override if set
       if (manualTarget !== null) {
         return manualTarget;
       }
@@ -718,7 +761,7 @@
       return target;
     }
 
-    // Generate weight loss suggestions based on data
+    // Generate suggestions
     function updateSuggestion() {
       const age = parseInt(ageInput.value, 10) || 28;
       const weight = parseInt(weightInput.value, 10) || 60;
@@ -726,7 +769,6 @@
       const bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
       const maintenance = Math.round(bmr * 1.375);
       
-      // Calculate BMI
       const heightM = height / 100;
       const bmi = weight / (heightM * heightM);
       
@@ -738,22 +780,19 @@
         const deficit = maintenance - target;
         
         if (bmi < 18.5) {
-          suggestion = `⚠️ Your BMI is ${bmi.toFixed(1)} (underweight). A weight loss goal may not be healthy right now. Consider speaking with a healthcare provider.`;
+          suggestion = `⚠️ Your BMI is ${bmi.toFixed(1)} (underweight). A weight loss goal may not be healthy right now.`;
           icon = '⚠️';
         } else if (bmi >= 18.5 && bmi < 25) {
-          suggestion = `✨ Your BMI is ${bmi.toFixed(1)} (healthy). A ${deficit} cal deficit could help you lose about ${Math.round(deficit * 7 / 7700 * 10) / 10}kg per week. Focus on nutrient-dense foods.`;
+          suggestion = `✨ Your BMI is ${bmi.toFixed(1)} (healthy). A ${deficit} cal deficit = ~${Math.round(deficit * 7 / 7700 * 10) / 10}kg/week.`;
         } else if (bmi >= 25 && bmi < 30) {
-          suggestion = `🌱 Your BMI is ${bmi.toFixed(1)} (overweight). A ${deficit} cal deficit could help you lose about ${Math.round(deficit * 7 / 7700 * 10) / 10}kg per week. Add more veggies and protein.`;
+          suggestion = `🌱 Your BMI is ${bmi.toFixed(1)}. A ${deficit} cal deficit = ~${Math.round(deficit * 7 / 7700 * 10) / 10}kg/week.`;
         } else {
-          suggestion = `💪 Your BMI is ${bmi.toFixed(1)}. A ${deficit} cal deficit is a good start. Aim for 7-10k steps daily and prioritize protein.`;
+          suggestion = `💪 Your BMI is ${bmi.toFixed(1)}. ${deficit} cal deficit is a good start.`;
         }
         
-        // Add specific tips based on current intake vs target
         const todayTotal = getTodayTotal();
         if (todayTotal > target + 200) {
-          suggestion += ` You're ${todayTotal - target} over target today — maybe choose lower-cal options for next meal.`;
-        } else if (todayTotal < target - 200 && todayTotal > 0) {
-          suggestion += ` You're under target — if hungry, add a protein-rich snack.`;
+          suggestion += ` You're ${todayTotal - target} over target today.`;
         }
         
       } else if (currentGoal === 'gain') {
@@ -761,24 +800,17 @@
         const surplus = target - maintenance;
         
         if (bmi > 25) {
-          suggestion = `⚖️ Your BMI is ${bmi.toFixed(1)}. If gaining muscle, focus on protein and strength training. A ${surplus} cal surplus is moderate.`;
+          suggestion = `⚖️ BMI ${bmi.toFixed(1)}. ${surplus} cal surplus. Focus on protein.`;
         } else {
-          suggestion = `🌿 To gain weight healthily, add healthy fats, nuts, and protein shakes. Your ${surplus} cal surplus should lead to ~${Math.round(surplus * 7 / 7700 * 10) / 10}kg gain per week.`;
+          suggestion = `🌿 ${surplus} cal surplus = ~${Math.round(surplus * 7 / 7700 * 10) / 10}kg/week.`;
         }
-      } else { // maintain
+      } else {
         if (bmi < 18.5) {
-          suggestion = `💭 Your BMI is ${bmi.toFixed(1)} (underweight). Consider a slight calorie surplus to reach a healthier weight.`;
+          suggestion = `💭 BMI ${bmi.toFixed(1)} (underweight). Consider a surplus.`;
         } else if (bmi >= 18.5 && bmi < 25) {
-          suggestion = `✨ Your BMI is ${bmi.toFixed(1)} (healthy). You're eating at maintenance (${maintenance} cal). Great job!`;
-        } else if (bmi >= 25 && bmi < 30) {
-          suggestion = `🌱 Your BMI is ${bmi.toFixed(1)} (overweight). Maintaining is good, but a slight deficit could help reach a healthier range.`;
+          suggestion = `✨ BMI ${bmi.toFixed(1)} (healthy). Maintenance = ${maintenance} cal.`;
         } else {
-          suggestion = `💪 Your BMI is ${bmi.toFixed(1)}. Maintaining is a positive step. Even small changes add up over time.`;
-        }
-        
-        const todayTotal = getTodayTotal();
-        if (Math.abs(todayTotal - maintenance) < 100) {
-          suggestion += ` You're right on target today! 🎯`;
+          suggestion = `🌱 BMI ${bmi.toFixed(1)}. Maintenance is great.`;
         }
       }
       
@@ -795,6 +827,7 @@
       targetSpan.innerText = val;
       updateSuggestion();
       renderActiveDay();
+      saveProfile(); // Save profile whenever target updates
     }
 
     // Goal button handlers
@@ -803,30 +836,25 @@
         document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentGoal = btn.dataset.goal;
-        manualTarget = null; // Reset manual when goal changes
-        localStorage.setItem('gf_current_goal', currentGoal);
-        localStorage.removeItem('gf_manual_target');
+        manualTarget = null;
         updateTargetUI();
       });
       
-      // Set active based on saved goal
       if (btn.dataset.goal === currentGoal) {
         btn.classList.add('active');
       }
     });
 
-    // Allow manual target edit (double click on target)
-    targetSpan.addEventListener('dblclick', () => {
+    // Manual target edit
+    document.getElementById('targetRow').addEventListener('click', () => {
       const newTarget = prompt('Enter custom daily calorie target (or leave empty to use calculated):', targetSpan.innerText);
       if (newTarget !== null) {
         if (newTarget.trim() === '') {
           manualTarget = null;
-          localStorage.removeItem('gf_manual_target');
         } else {
           const parsed = parseInt(newTarget, 10);
           if (!isNaN(parsed) && parsed >= 800 && parsed <= 5000) {
             manualTarget = parsed;
-            localStorage.setItem('gf_manual_target', parsed);
           } else {
             alert('Please enter a valid number between 800 and 5000');
           }
@@ -886,19 +914,18 @@
         remainingSpan.className = `remaining over`;
       }
       
-      // Add weekly estimate
-      const weeklyDeficit = remaining * 7;
+      const weeklyChange = Math.round(Math.abs(remaining) * 7 / 7700 * 10) / 10;
       if (currentGoal === 'lose' && remaining < 0) {
-        remainingText += ` (📈 +${Math.round(Math.abs(remaining) * 7 / 7700 * 10) / 10}kg/week)`;
+        remainingText += ` (📈 +${weeklyChange}kg/week)`;
       } else if (currentGoal === 'lose' && remaining > 0) {
-        remainingText += ` (📉 ~${Math.round(remaining * 7 / 7700 * 10) / 10}kg/week)`;
+        remainingText += ` (📉 ~${weeklyChange}kg/week)`;
       }
       
       remainingSpan.innerHTML = remainingText;
 
       foodListDiv.innerHTML = '';
       if (entries.length === 0) {
-        foodListDiv.innerHTML = '<div style="padding: 1rem; text-align: center; color:#b99c89;">✨ add some food</div>';
+        foodListDiv.innerHTML = '<div style="padding: 1rem; text-align: center; color:#777;">✨ add some food</div>';
       } else {
         entries.forEach((entry, idx) => {
           const itemDiv = document.createElement('div');
@@ -920,7 +947,7 @@
               foodData[day].splice(idx, 1);
               saveFoodData();
               renderActiveDay();
-              updateSuggestion(); // Update suggestion after change
+              updateSuggestion();
               renderDayButtons();
             }
           });
@@ -949,10 +976,9 @@
         container.appendChild(itemDiv);
       });
       
-      // Attach click handlers for quick buttons
       container.querySelectorAll('.quick-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          if (editMode) return; // Don't add in edit mode
+          if (editMode) return;
           const data = btn.dataset.quick.split(',').map(s => s.trim());
           const desc = data[0];
           const cal = parseInt(data[1], 10);
@@ -966,7 +992,6 @@
         });
       });
       
-      // Attach delete handlers
       container.querySelectorAll('.delete-quick').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -1010,7 +1035,6 @@
       quickPicks.push(newPick);
       saveQuickPicks();
       
-      // Clear inputs
       document.getElementById('newQuickDesc').value = '';
       document.getElementById('newQuickCal').value = '';
       
@@ -1108,19 +1132,17 @@
               if (imported.profile.weight) weightInput.value = imported.profile.weight;
               if (imported.profile.goal) {
                 currentGoal = imported.profile.goal;
-                localStorage.setItem('gf_current_goal', currentGoal);
-                // Update active button
                 document.querySelectorAll('.goal-btn').forEach(btn => {
                   btn.classList.toggle('active', btn.dataset.goal === currentGoal);
                 });
               }
               if (imported.profile.manualTarget) {
                 manualTarget = imported.profile.manualTarget;
-                localStorage.setItem('gf_manual_target', manualTarget);
               }
             }
             
             saveFoodData();
+            saveProfile();
             updateTargetUI();
             renderActiveDay();
             renderDayButtons();
@@ -1137,21 +1159,23 @@
     });
 
     // Initialize
-    ageInput.addEventListener('input', updateTargetUI);
-    heightInput.addEventListener('input', updateTargetUI);
-    weightInput.addEventListener('input', updateTargetUI);
+    ageInput.addEventListener('input', () => {
+      updateTargetUI();
+      saveProfile();
+    });
+    heightInput.addEventListener('input', () => {
+      updateTargetUI();
+      saveProfile();
+    });
+    weightInput.addEventListener('input', () => {
+      updateTargetUI();
+      saveProfile();
+    });
     
     renderDayButtons();
     if (!foodData[activeDay]) foodData[activeDay] = [];
     updateTargetUI();
     renderQuickPicks();
-    
-    function refreshAfterProfile() {
-      updateTargetUI();
-    }
-    ageInput.addEventListener('change', refreshAfterProfile);
-    heightInput.addEventListener('change', refreshAfterProfile);
-    weightInput.addEventListener('change', refreshAfterProfile);
   })();
 </script>
 </body>
