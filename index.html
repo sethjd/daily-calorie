@@ -525,6 +525,44 @@
       display: none;
     }
 
+    /* new buttons row */
+    .action-row {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0 0.5rem;
+    }
+    
+    .action-btn {
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 50px;
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #ccc;
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    
+    .action-btn.warning {
+      background: #2a1f1a;
+      border-color: #8b5e45;
+      color: #d9a885;
+    }
+    
+    .action-btn:active {
+      background: #333;
+    }
+    
+    .action-btn.warning:active {
+      background: #3f2e24;
+    }
+
     .small-note {
       font-size: 0.75rem;
       color: #777;
@@ -557,13 +595,13 @@
       </div>
     </div>
     
-    <!-- Daily target (can be manually set) -->
+    <!-- Daily target -->
     <div class="target-row" id="targetRow">
       <span>🔥 daily target</span>
       <span class="target-number" id="targetDisplay">1950</span>
     </div>
     
-    <!-- Weight loss suggestion badge -->
+    <!-- Suggestion badge -->
     <div id="suggestionBadge" class="suggestion-badge">
       <span class="suggestion-icon">💡</span>
       <span class="suggestion-text" id="suggestionText">adjust your goal for personalized tips</span>
@@ -585,6 +623,12 @@
       <!-- entries injected -->
     </div>
     <div class="remaining" id="remainingDisplay">⬇️ 0 remaining</div>
+
+    <!-- NEW ACTION ROW - Export Week & Reset Week -->
+    <div class="action-row">
+      <button class="action-btn" id="exportWeekBtn">📊 export week</button>
+      <button class="action-btn warning" id="resetWeekBtn">🔄 reset week</button>
+    </div>
 
     <!-- add food row -->
     <div class="add-section">
@@ -631,16 +675,17 @@
 
   <!-- export / import -->
   <div class="backup-row">
-    <button class="sec-btn" id="exportBtn">📤 export</button>
-    <label for="importFile" class="file-input-label" id="importLabel">📥 import</label>
+    <button class="sec-btn" id="exportBtn">📤 full backup</button>
+    <label for="importFile" class="file-input-label" id="importLabel">📥 restore</label>
     <input type="file" id="importFile" accept=".json,application/json">
   </div>
-  <div class="small-note">✨ all data saved on this device — export as backup</div>
+  <div class="small-note">✨ all data saved on this device — export week to keep a record</div>
 </div>
 
 <script>
   (function() {
     const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    const DAY_NAMES_CAPS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     let activeDay = 'monday';
     let foodData = {};
     let quickPicks = [];
@@ -689,12 +734,11 @@
         ];
       }
       
-      // Load profile data (age, height, weight, goal, manual target)
+      // Load profile data
       const savedProfile = localStorage.getItem('gf_profile');
       if (savedProfile) {
         const profile = JSON.parse(savedProfile);
         
-        // Set input values from saved profile
         const ageInput = document.getElementById('ageInput');
         const heightInput = document.getElementById('heightInput');
         const weightInput = document.getElementById('weightInput');
@@ -773,7 +817,6 @@
       const bmi = weight / (heightM * heightM);
       
       let suggestion = '';
-      let icon = '💡';
       
       if (currentGoal === 'lose') {
         const target = computeTarget();
@@ -781,18 +824,12 @@
         
         if (bmi < 18.5) {
           suggestion = `⚠️ Your BMI is ${bmi.toFixed(1)} (underweight). A weight loss goal may not be healthy right now.`;
-          icon = '⚠️';
         } else if (bmi >= 18.5 && bmi < 25) {
           suggestion = `✨ Your BMI is ${bmi.toFixed(1)} (healthy). A ${deficit} cal deficit = ~${Math.round(deficit * 7 / 7700 * 10) / 10}kg/week.`;
         } else if (bmi >= 25 && bmi < 30) {
           suggestion = `🌱 Your BMI is ${bmi.toFixed(1)}. A ${deficit} cal deficit = ~${Math.round(deficit * 7 / 7700 * 10) / 10}kg/week.`;
         } else {
           suggestion = `💪 Your BMI is ${bmi.toFixed(1)}. ${deficit} cal deficit is a good start.`;
-        }
-        
-        const todayTotal = getTodayTotal();
-        if (todayTotal > target + 200) {
-          suggestion += ` You're ${todayTotal - target} over target today.`;
         }
         
       } else if (currentGoal === 'gain') {
@@ -827,7 +864,7 @@
       targetSpan.innerText = val;
       updateSuggestion();
       renderActiveDay();
-      saveProfile(); // Save profile whenever target updates
+      saveProfile();
     }
 
     // Goal button handlers
@@ -870,6 +907,79 @@
     
     function saveQuickPicks() {
       localStorage.setItem('gf_quick_picks', JSON.stringify(quickPicks));
+    }
+
+    // EXPORT WEEK FUNCTION
+    function exportWeekAsText() {
+      const target = computeTarget();
+      const today = new Date();
+      const weekStart = new Date(today);
+      weekStart.setDate(today.getDate() - today.getDay() + 1); // Monday
+      const weekEnd = new Date(today);
+      weekEnd.setDate(today.getDate() - today.getDay() + 7); // Sunday
+      
+      const dateStr = `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
+      
+      let weekSummary = `📊 WEEKLY SUMMARY (${dateStr})\n\n`;
+      let weekTotal = 0;
+      let daysTracked = 0;
+      
+      DAYS.forEach((day, index) => {
+        const entries = foodData[day] || [];
+        const dayTotal = entries.reduce((sum, e) => sum + (Number(e.cal) || 0), 0);
+        weekTotal += dayTotal;
+        if (entries.length > 0) daysTracked++;
+        
+        weekSummary += `${DAY_NAMES_CAPS[index]} - ${dayTotal}/${target} cal\n`;
+        
+        if (entries.length > 0) {
+          entries.forEach(entry => {
+            weekSummary += `  • ${entry.desc} ${entry.cal}\n`;
+          });
+        } else {
+          weekSummary += `  • no entries\n`;
+        }
+        weekSummary += `\n`;
+      });
+      
+      const avgDaily = daysTracked > 0 ? Math.round(weekTotal / daysTracked) : 0;
+      weekSummary += `✨ WEEK TOTALS:\n`;
+      weekSummary += `• Total: ${weekTotal} cal\n`;
+      weekSummary += `• Daily avg: ${avgDaily} cal\n`;
+      weekSummary += `• Days tracked: ${daysTracked}/7\n`;
+      
+      if (currentGoal === 'lose') {
+        const deficit = target - avgDaily;
+        const weeklyLoss = Math.round(deficit * 7 / 7700 * 10) / 10;
+        weekSummary += `• Est. weight change: ${weeklyLoss > 0 ? '📉 -' : '📈 +'}${Math.abs(weeklyLoss)}kg/week\n`;
+      }
+      
+      // Create and download text file
+      const blob = new Blob([weekSummary], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `week_${weekStart.toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // Also show preview (optional)
+      alert('Week exported! Check your downloads folder.');
+    }
+
+    // RESET WEEK FUNCTION
+    function resetWeek() {
+      if (confirm('⚠️ This will delete ALL food entries for the entire week. Are you sure?')) {
+        DAYS.forEach(day => {
+          foodData[day] = [];
+        });
+        saveFoodData();
+        renderActiveDay();
+        renderDayButtons();
+        alert('Week reset! Ready for a fresh start ✨');
+      }
     }
 
     // Render day buttons
@@ -1080,7 +1190,13 @@
       });
     }
 
-    // Export
+    // Export week button
+    document.getElementById('exportWeekBtn').addEventListener('click', exportWeekAsText);
+
+    // Reset week button
+    document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
+
+    // Full export
     document.getElementById('exportBtn').addEventListener('click', () => {
       const exportObj = {
         foodData: foodData,
