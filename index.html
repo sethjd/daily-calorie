@@ -102,6 +102,167 @@
       font-weight: 600;
     }
 
+    /* GAMIFICATION SECTION */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      background: #252525;
+      border-radius: 30px;
+      padding: 1rem;
+    }
+    
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      background: #1e1e1e;
+      border-radius: 25px;
+      padding: 0.8rem 0.5rem;
+      border: 1px solid #3a3a3a;
+    }
+    
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #d9a885;
+      line-height: 1.2;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .streak-fire {
+      display: inline-block;
+      margin-right: 0.2rem;
+      font-size: 1.2rem;
+    }
+    
+    .xp-bar-container {
+      background: #1e1e1e;
+      border-radius: 20px;
+      height: 20px;
+      margin: 0.8rem 0 0.2rem;
+      border: 1px solid #3a3a3a;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .xp-bar-fill {
+      background: linear-gradient(90deg, #b88b6a, #d9a885);
+      height: 100%;
+      width: 0%;
+      border-radius: 20px;
+      transition: width 0.3s;
+    }
+    
+    .xp-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 0.5rem;
+    }
+    
+    .badges-row {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      margin: 0.5rem 0;
+      scrollbar-width: none;
+    }
+    
+    .badges-row::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .badge {
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 30px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+      color: #ccc;
+    }
+    
+    .badge.unlocked {
+      background: #2a2a2a;
+      border-color: #b88b6a;
+      color: #d9a885;
+    }
+    
+    .badge.locked {
+      opacity: 0.5;
+    }
+    
+    .celebration-message {
+      background: #2a2a2a;
+      border-left: 4px solid #d9a885;
+      border-radius: 20px;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      color: #eaeaea;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .weekly-awards {
+      background: #252525;
+      border-radius: 25px;
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid #3a3a3a;
+    }
+    
+    .awards-title {
+      font-size: 0.9rem;
+      color: #b88b6a;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .award-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      padding: 0.3rem 0;
+    }
+    
+    .award-icon {
+      font-size: 1.2rem;
+      width: 2rem;
+      text-align: center;
+    }
+    
+    .award-text {
+      flex: 1;
+      color: #ccc;
+    }
+    
+    .award-highlight {
+      color: #d9a885;
+      font-weight: 500;
+    }
+
     .target-row {
       background: #252525;
       border-radius: 40px;
@@ -525,7 +686,6 @@
       display: none;
     }
 
-    /* new buttons row */
     .action-row {
       display: flex;
       gap: 0.5rem;
@@ -594,6 +754,40 @@
         <button class="goal-btn" data-goal="gain">⬆️ gain</button>
       </div>
     </div>
+
+    <!-- GAMIFICATION SECTION - Stats Row -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-value"><span class="streak-fire">🔥</span> <span id="streakCount">0</span></div>
+        <div class="stat-label">DAY STREAK</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="badgeCount">0</div>
+        <div class="stat-label">BADGES</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="levelDisplay">1</div>
+        <div class="stat-label">LEVEL</div>
+      </div>
+    </div>
+    
+    <!-- XP Bar -->
+    <div class="xp-text">
+      <span id="xpCurrent">0 XP</span>
+      <span id="xpNext">100 XP</span>
+    </div>
+    <div class="xp-bar-container">
+      <div class="xp-bar-fill" id="xpBar" style="width: 0%;"></div>
+    </div>
+    
+    <!-- Badges Row -->
+    <div class="badges-row" id="badgesContainer"></div>
+    
+    <!-- Celebration Message -->
+    <div id="celebrationMessage" class="celebration-message" style="display: none;"></div>
+    
+    <!-- Weekly Awards -->
+    <div id="weeklyAwards" class="weekly-awards" style="display: none;"></div>
     
     <!-- Daily target -->
     <div class="target-row" id="targetRow">
@@ -624,7 +818,7 @@
     </div>
     <div class="remaining" id="remainingDisplay">⬇️ 0 remaining</div>
 
-    <!-- NEW ACTION ROW - Export Week & Reset Week -->
+    <!-- ACTION ROW - Export Week & Reset Week -->
     <div class="action-row">
       <button class="action-btn" id="exportWeekBtn">📊 export week</button>
       <button class="action-btn warning" id="resetWeekBtn">🔄 reset week</button>
@@ -693,6 +887,15 @@
     let editMode = false;
     let currentGoal = 'maintain';
     let manualTarget = null;
+    
+    // GAMIFICATION STATE
+    let streak = 0;
+    let xp = 0;
+    let level = 1;
+    let badges = [];
+    let lastLogDate = null;
+    let celebrationMessage = '';
+    let weeklyAwards = {};
 
     // Load ALL saved data
     try {
@@ -750,6 +953,20 @@
         if (profile.manualTarget) manualTarget = profile.manualTarget;
       }
       
+      // Load gamification data
+      const savedGame = localStorage.getItem('gf_gamification');
+      if (savedGame) {
+        const game = JSON.parse(savedGame);
+        streak = game.streak || 0;
+        xp = game.xp || 0;
+        level = game.level || 1;
+        badges = game.badges || [];
+        lastLogDate = game.lastLogDate ? new Date(game.lastLogDate) : null;
+      } else {
+        // Initialize with first badge
+        badges = [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
+      }
+      
     } catch (e) {
       console.log('Error loading data:', e);
       DAYS.forEach(d => foodData[d] = []);
@@ -762,6 +979,17 @@
     const weightInput = document.getElementById('weightInput');
     const targetSpan = document.getElementById('targetDisplay');
     const suggestionText = document.getElementById('suggestionText');
+    
+    // Gamification elements
+    const streakSpan = document.getElementById('streakCount');
+    const badgeCountSpan = document.getElementById('badgeCount');
+    const levelSpan = document.getElementById('levelDisplay');
+    const xpCurrentSpan = document.getElementById('xpCurrent');
+    const xpNextSpan = document.getElementById('xpNext');
+    const xpBar = document.getElementById('xpBar');
+    const badgesContainer = document.getElementById('badgesContainer');
+    const celebrationDiv = document.getElementById('celebrationMessage');
+    const weeklyAwardsDiv = document.getElementById('weeklyAwards');
 
     // Save profile to localStorage
     function saveProfile() {
@@ -773,6 +1001,18 @@
         manualTarget: manualTarget
       };
       localStorage.setItem('gf_profile', JSON.stringify(profile));
+    }
+    
+    // Save gamification data
+    function saveGamification() {
+      const game = {
+        streak: streak,
+        xp: xp,
+        level: level,
+        badges: badges,
+        lastLogDate: lastLogDate ? lastLogDate.toISOString() : null
+      };
+      localStorage.setItem('gf_gamification', JSON.stringify(game));
     }
 
     // Calculate BMR and target based on goal
@@ -805,7 +1045,216 @@
       return target;
     }
 
-    // Generate suggestions
+    // Update gamification UI
+    function updateGamificationUI() {
+      streakSpan.innerText = streak;
+      
+      const unlockedCount = badges.filter(b => b.unlocked).length;
+      badgeCountSpan.innerText = unlockedCount;
+      levelSpan.innerText = level;
+      
+      // XP calculation (level * 100 for next level)
+      const xpForNextLevel = level * 100;
+      xpCurrentSpan.innerText = `${xp} XP`;
+      xpNextSpan.innerText = `${xpForNextLevel} XP`;
+      
+      const xpPercent = (xp / xpForNextLevel) * 100;
+      xpBar.style.width = `${Math.min(xpPercent, 100)}%`;
+      
+      // Render badges
+      renderBadges();
+      
+      // Check for level up
+      if (xp >= xpForNextLevel) {
+        level++;
+        xp = 0;
+        showCelebration(`🎉 LEVEL UP! You're now level ${level}!`, 'level_up');
+        saveGamification();
+      }
+    }
+    
+    // Render badges
+    function renderBadges() {
+      badgesContainer.innerHTML = '';
+      
+      // Show first 5 badges (most recent/relevant)
+      const displayBadges = badges.slice(0, 5);
+      
+      displayBadges.forEach(badge => {
+        const badgeEl = document.createElement('span');
+        badgeEl.className = `badge ${badge.unlocked ? 'unlocked' : 'locked'}`;
+        badgeEl.innerHTML = `${badge.name}`;
+        badgesContainer.appendChild(badgeEl);
+      });
+    }
+    
+    // Check and update streak
+    function checkStreak() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (!lastLogDate) {
+        // First time logging
+        streak = 1;
+        showCelebration('🎯 First log! Streak started! 🔥', 'streak');
+      } else {
+        const last = new Date(lastLogDate);
+        last.setHours(0, 0, 0, 0);
+        
+        const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) {
+          // Consecutive day
+          streak++;
+          if (streak === 7) {
+            showCelebration('⚡ 7 DAY STREAK! You\'re on fire!', 'streak');
+            checkBadge('on_fire');
+          } else if (streak === 14) {
+            showCelebration('💪 14 DAY STREAK! Unstoppable!', 'streak');
+            checkBadge('unstoppable');
+          } else if (streak === 30) {
+            showCelebration('👑 30 DAY STREAK! STREAK QUEEN!', 'streak');
+            checkBadge('streak_queen');
+          }
+        } else if (diffDays > 1) {
+          // Streak broken
+          streak = 1;
+          showCelebration('🔄 Fresh start! New streak begins!', 'streak');
+        }
+        // diffDays === 0 means already logged today, do nothing
+      }
+      
+      lastLogDate = new Date();
+      saveGamification();
+      updateGamificationUI();
+    }
+    
+    // Add XP
+    function addXP(amount, source) {
+      xp += amount;
+      
+      // Random celebration based on source
+      const messages = {
+        meal: ['+10 XP! Keep logging!', '📝 Meal logged!', '+10 XP towards next level!'],
+        goal: ['🎯 GOAL HIT! +50 XP!', '💥 Perfect day! +50 XP!', '✨ Target smashed! +50 XP!'],
+        streak: ['🔥 Streak bonus!', '⚡ Extra XP for consistency!'],
+        badge: ['🏆 BADGE UNLOCKED! +50 XP!', '🎉 Achievement earned! +50 XP!']
+      };
+      
+      const msgList = messages[source] || ['✨ XP gained!'];
+      const msg = msgList[Math.floor(Math.random() * msgList.length)];
+      
+      showCelebration(msg, 'xp');
+      
+      saveGamification();
+      updateGamificationUI();
+    }
+    
+    // Check badge unlocks
+    function checkBadge(badgeId) {
+      const badgeConfig = {
+        first_step: { name: '🥉 First Step', xp: 50 },
+        on_fire: { name: '⚡ On Fire', xp: 50 },
+        unstoppable: { name: '💪 Unstoppable', xp: 100 },
+        streak_queen: { name: '👑 Streak Queen', xp: 200 },
+        week_warrior: { name: '🌟 Week Warrior', xp: 100 },
+        perfect_week: { name: '🎯 Perfect Week', xp: 150 },
+        foodie: { name: '🥗 Foodie', xp: 50 }
+      };
+      
+      const badge = badges.find(b => b.id === badgeId);
+      if (badge && !badge.unlocked) {
+        badge.unlocked = true;
+        showCelebration(`🏆 BADGE UNLOCKED: ${badge.name}!`, 'badge');
+        addXP(badgeConfig[badgeId].xp, 'badge');
+      }
+    }
+    
+    // Show celebration message
+    function showCelebration(message, type) {
+      celebrationMessage = message;
+      celebrationDiv.style.display = 'block';
+      celebrationDiv.innerHTML = message;
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        celebrationDiv.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Calculate weekly awards
+    function calculateWeeklyAwards() {
+      const target = computeTarget();
+      const weekTotals = {};
+      let bestDay = null;
+      let bestDayScore = Infinity;
+      let mostAccurate = null;
+      let accuracyScore = Infinity;
+      let totalDeficit = 0;
+      let daysLogged = 0;
+      
+      DAYS.forEach((day, index) => {
+        const entries = foodData[day] || [];
+        const total = entries.reduce((sum, e) => sum + (Number(e.cal) || 0), 0);
+        weekTotals[day] = total;
+        
+        if (entries.length > 0) {
+          daysLogged++;
+          totalDeficit += target - total;
+          
+          // Find best day (closest to target without going over? or just closest)
+          const diff = Math.abs(total - target);
+          if (diff < bestDayScore) {
+            bestDayScore = diff;
+            bestDay = DAY_NAMES_CAPS[index];
+          }
+          
+          // Most accurate (closest to target)
+          if (diff < accuracyScore) {
+            accuracyScore = diff;
+            mostAccurate = DAY_NAMES_CAPS[index];
+          }
+        }
+      });
+      
+      // Check for week warrior badge (all days logged)
+      if (daysLogged === 7) {
+        checkBadge('week_warrior');
+      }
+      
+      // Check for perfect week (all days on target)
+      const perfectWeek = DAYS.every(day => {
+        const total = weekTotals[day] || 0;
+        return Math.abs(total - target) <= 50; // Within 50 cal
+      });
+      
+      if (perfectWeek) {
+        checkBadge('perfect_week');
+      }
+      
+      // Display awards
+      if (daysLogged > 0) {
+        weeklyAwardsDiv.style.display = 'block';
+        weeklyAwardsDiv.innerHTML = `
+          <div class="awards-title">🏆 WEEKLY AWARDS</div>
+          <div class="award-item">
+            <span class="award-icon">👑</span>
+            <span class="award-text">Best Day: <span class="award-highlight">${bestDay || 'None'}</span></span>
+          </div>
+          <div class="award-item">
+            <span class="award-icon">🎯</span>
+            <span class="award-text">Most Accurate: <span class="award-highlight">${mostAccurate || 'None'}</span></span>
+          </div>
+          <div class="award-item">
+            <span class="award-icon">📉</span>
+            <span class="award-text">Avg Deficit: <span class="award-highlight">${Math.round(totalDeficit / daysLogged)} cal</span></span>
+          </div>
+        `;
+      } else {
+        weeklyAwardsDiv.style.display = 'none';
+      }
+    }
+
     function updateSuggestion() {
       const age = parseInt(ageInput.value, 10) || 28;
       const weight = parseInt(weightInput.value, 10) || 60;
@@ -864,6 +1313,7 @@
       targetSpan.innerText = val;
       updateSuggestion();
       renderActiveDay();
+      calculateWeeklyAwards();
       saveProfile();
     }
 
@@ -914,9 +1364,9 @@
       const target = computeTarget();
       const today = new Date();
       const weekStart = new Date(today);
-      weekStart.setDate(today.getDate() - today.getDay() + 1); // Monday
+      weekStart.setDate(today.getDate() - today.getDay() + 1);
       const weekEnd = new Date(today);
-      weekEnd.setDate(today.getDate() - today.getDay() + 7); // Sunday
+      weekEnd.setDate(today.getDate() - today.getDay() + 7);
       
       const dateStr = `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
       
@@ -947,6 +1397,9 @@
       weekSummary += `• Total: ${weekTotal} cal\n`;
       weekSummary += `• Daily avg: ${avgDaily} cal\n`;
       weekSummary += `• Days tracked: ${daysTracked}/7\n`;
+      weekSummary += `• Current streak: ${streak} days 🔥\n`;
+      weekSummary += `• Level: ${level} (${xp} XP)\n`;
+      weekSummary += `• Badges: ${badges.filter(b => b.unlocked).length} unlocked\n`;
       
       if (currentGoal === 'lose') {
         const deficit = target - avgDaily;
@@ -954,7 +1407,6 @@
         weekSummary += `• Est. weight change: ${weeklyLoss > 0 ? '📉 -' : '📈 +'}${Math.abs(weeklyLoss)}kg/week\n`;
       }
       
-      // Create and download text file
       const blob = new Blob([weekSummary], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -965,7 +1417,6 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       
-      // Also show preview (optional)
       alert('Week exported! Check your downloads folder.');
     }
 
@@ -978,6 +1429,7 @@
         saveFoodData();
         renderActiveDay();
         renderDayButtons();
+        calculateWeeklyAwards();
         alert('Week reset! Ready for a fresh start ✨');
       }
     }
@@ -1058,6 +1510,7 @@
               saveFoodData();
               renderActiveDay();
               updateSuggestion();
+              calculateWeeklyAwards();
               renderDayButtons();
             }
           });
@@ -1098,6 +1551,14 @@
             saveFoodData();
             renderActiveDay();
             updateSuggestion();
+            
+            // Add XP for logging meal
+            addXP(10, 'meal');
+            
+            // Check for first log badge
+            if (!badges.find(b => b.id === 'first_step')?.unlocked) {
+              checkBadge('first_step');
+            }
           }
         });
       });
@@ -1180,6 +1641,14 @@
       calInput.value = '';
       renderActiveDay();
       updateSuggestion();
+      
+      // Add XP for logging meal
+      addXP(10, 'meal');
+      
+      // Check for first log badge
+      if (!badges.find(b => b.id === 'first_step')?.unlocked) {
+        checkBadge('first_step');
+      }
     });
 
     function escapeHtml(unsafe) {
@@ -1207,6 +1676,13 @@
           weight: weightInput.value,
           goal: currentGoal,
           manualTarget: manualTarget
+        },
+        gamification: {
+          streak: streak,
+          xp: xp,
+          level: level,
+          badges: badges,
+          lastLogDate: lastLogDate ? lastLogDate.toISOString() : null
         }
       };
       const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
@@ -1257,12 +1733,23 @@
               }
             }
             
+            if (imported.gamification) {
+              streak = imported.gamification.streak || 0;
+              xp = imported.gamification.xp || 0;
+              level = imported.gamification.level || 1;
+              badges = imported.gamification.badges || [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
+              lastLogDate = imported.gamification.lastLogDate ? new Date(imported.gamification.lastLogDate) : null;
+            }
+            
             saveFoodData();
             saveProfile();
+            saveGamification();
+            updateGamificationUI();
             updateTargetUI();
             renderActiveDay();
             renderDayButtons();
             renderQuickPicks();
+            calculateWeeklyAwards();
           } else {
             alert('file does not contain valid food data');
           }
@@ -1292,6 +1779,8 @@
     if (!foodData[activeDay]) foodData[activeDay] = [];
     updateTargetUI();
     renderQuickPicks();
+    updateGamificationUI();
+    calculateWeeklyAwards();
   })();
 </script>
 </body>
