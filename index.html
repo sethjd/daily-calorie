@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>gf · food & cal tracker</title>
+  <title>gf · fitness & cal tracker</title>
   <style>
     * {
       box-sizing: border-box;
@@ -100,6 +100,47 @@
       border-color: #d9a885;
       color: #121212;
       font-weight: 600;
+    }
+
+    /* TAB SWITCHER */
+    .tab-switcher {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      background: #1e1e1e;
+      padding: 0.5rem;
+      border-radius: 50px;
+      border: 1px solid #333;
+    }
+    
+    .tab-btn {
+      flex: 1;
+      background: #252525;
+      border: none;
+      border-radius: 40px;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #aaa;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    
+    .tab-btn.active {
+      background: #b88b6a;
+      color: #121212;
+    }
+    
+    .tab-btn.cal.active {
+      background: #b88b6a;
+    }
+    
+    .tab-btn.gym.active {
+      background: #6a8b8b;
     }
 
     /* GAMIFICATION SECTION */
@@ -311,7 +352,7 @@
       color: #d9a885;
     }
 
-    /* days navigation */
+    /* days navigation - same for both tabs */
     .day-strip {
       display: flex;
       gap: 0.4rem;
@@ -344,7 +385,7 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
 
-    /* daily log panel */
+    /* daily log panel - cal mode */
     .day-panel {
       background: #1e1e1e;
       border-radius: 40px;
@@ -390,6 +431,157 @@
       color: #8ba88b;
     }
 
+    /* GYM MODE STYLES */
+    .gym-panel {
+      background: #1e1e1e;
+      border-radius: 40px;
+      padding: 1.5rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      border: 1px solid #333;
+    }
+    
+    .gym-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0rem 0 1.5rem;
+    }
+    
+    .gym-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #eaeaea;
+    }
+    
+    .gym-title span {
+      color: #d9a885;
+      background: #252525;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      margin-left: 0.3rem;
+    }
+    
+    .workout-streak {
+      background: #252525;
+      border-radius: 30px;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      color: #8ba88b;
+      border: 1px solid #3a3a3a;
+    }
+    
+    .workout-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .workout-category h3 {
+      color: #b88b6a;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .workout-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    
+    .workout-btn {
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 40px;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      flex: 1 0 auto;
+      justify-content: center;
+    }
+    
+    .workout-btn:active {
+      background: #333;
+    }
+    
+    .workout-log {
+      margin-top: 1.5rem;
+      background: #252525;
+      border-radius: 30px;
+      padding: 1rem;
+    }
+    
+    .workout-log-title {
+      display: flex;
+      justify-content: space-between;
+      color: #b88b6a;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .workout-entry {
+      display: flex;
+      align-items: center;
+      background: #1e1e1e;
+      border-radius: 40px;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #3a3a3a;
+    }
+    
+    .workout-desc {
+      flex: 1;
+      color: #eaeaea;
+    }
+    
+    .workout-xp {
+      background: #333;
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      color: #8ba88b;
+      margin-right: 0.5rem;
+    }
+    
+    .workout-remove {
+      color: #8b5e45;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+    
+    .today-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #252525;
+      border-radius: 30px;
+    }
+    
+    .today-stat {
+      text-align: center;
+    }
+    
+    .today-stat-value {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #d9a885;
+    }
+    
+    .today-stat-label {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
     /* entry list */
     .food-entry {
       display: flex;
@@ -432,7 +624,7 @@
       background: #3a3a3a;
     }
 
-    /* add section */
+    /* add section - used in both tabs */
     .add-section {
       background: #252525;
       border-radius: 36px;
@@ -477,7 +669,7 @@
       background: #a07554;
     }
 
-    /* quick picks management */
+    /* quick picks management - used for both food and gym */
     .quick-picks-header {
       display: flex;
       justify-content: space-between;
@@ -581,7 +773,7 @@
       flex-wrap: wrap;
     }
     
-    .add-quick-row input {
+    .add-quick-row input, .add-quick-row select {
       flex: 1;
       background: #1e1e1e;
       border: 1px solid #555;
@@ -589,15 +781,6 @@
       padding: 0.7rem 1rem;
       font-size: 0.95rem;
       min-width: 120px;
-      color: #eaeaea;
-    }
-    
-    .add-quick-row select {
-      background: #1e1e1e;
-      border: 1px solid #555;
-      border-radius: 40px;
-      padding: 0.7rem 1rem;
-      font-size: 0.95rem;
       color: #eaeaea;
     }
     
@@ -729,6 +912,10 @@
       text-align: center;
       margin-top: 1rem;
     }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -759,7 +946,11 @@
     <div class="stats-row">
       <div class="stat-item">
         <div class="stat-value"><span class="streak-fire">🔥</span> <span id="streakCount">0</span></div>
-        <div class="stat-label">DAY STREAK</div>
+        <div class="stat-label">FOOD STREAK</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value"><span class="streak-fire">💪</span> <span id="workoutStreakCount">0</span></div>
+        <div class="stat-label">WORKOUT STREAK</div>
       </div>
       <div class="stat-item">
         <div class="stat-value" id="badgeCount">0</div>
@@ -802,67 +993,155 @@
     </div>
   </div>
 
-  <!-- days of the week -->
-  <div class="day-strip" id="dayStrip">
-    <!-- dynamically filled by js -->
+  <!-- TAB SWITCHER -->
+  <div class="tab-switcher">
+    <button class="tab-btn cal active" id="calTabBtn">🔥 CALORIES</button>
+    <button class="tab-btn gym" id="gymTabBtn">💪 GYM</button>
   </div>
 
-  <!-- active day panel -->
-  <div class="day-panel" id="dayPanel">
-    <div class="day-header">
-      <span class="day-name" id="currentDayName">monday</span>
-      <span class="day-total" id="currentDayTotal">0 <span>kcal</span></span>
-    </div>
-    <div id="foodListContainer" class="food-list">
-      <!-- entries injected -->
-    </div>
-    <div class="remaining" id="remainingDisplay">⬇️ 0 remaining</div>
+  <!-- CALORIES TAB CONTENT -->
+  <div id="calTabContent">
+    <!-- days of the week - OUTSIDE the panel -->
+    <div class="day-strip" id="dayStrip"></div>
 
-    <!-- ACTION ROW - Export Week & Reset Week -->
-    <div class="action-row">
-      <button class="action-btn" id="exportWeekBtn">📊 export week</button>
-      <button class="action-btn warning" id="resetWeekBtn">🔄 reset week</button>
-    </div>
+    <!-- active day panel -->
+    <div class="day-panel">
+      <div class="day-header">
+        <span class="day-name" id="currentDayName">monday</span>
+        <span class="day-total" id="currentDayTotal">0 <span>kcal</span></span>
+      </div>
+      <div id="foodListContainer" class="food-list"></div>
+      <div class="remaining" id="remainingDisplay">⬇️ 0 remaining</div>
 
-    <!-- add food row -->
-    <div class="add-section">
-      <div class="flex-row">
-        <input type="text" id="foodDescInput" placeholder="food (e.g. coffee)" value="">
-        <input type="number" id="foodCalInput" placeholder="cal" value="">
-        <button class="primary-btn" id="addFoodBtn">➕ add</button>
+      <!-- ACTION ROW - Export Week & Reset Week -->
+      <div class="action-row">
+        <button class="action-btn" id="exportWeekBtn">📊 export week</button>
+        <button class="action-btn warning" id="resetWeekBtn">🔄 reset week</button>
       </div>
 
-      <!-- EDITABLE QUICK PICKS SECTION -->
-      <div class="quick-picks-header">
-        <span class="quick-category">🍽️ my quick picks</span>
-        <button class="edit-toggle" id="editQuickToggle">✏️ edit</button>
+      <!-- add food row -->
+      <div class="add-section">
+        <div class="flex-row">
+          <input type="text" id="foodDescInput" placeholder="food (e.g. coffee)" value="">
+          <input type="number" id="foodCalInput" placeholder="cal" value="">
+          <button class="primary-btn" id="addFoodBtn">➕ add</button>
+        </div>
+
+        <!-- EDITABLE QUICK PICKS SECTION -->
+        <div class="quick-picks-header">
+          <span class="quick-category">🍽️ my quick picks</span>
+          <button class="edit-toggle" id="editQuickToggle">✏️ edit</button>
+        </div>
+        
+        <!-- category tabs -->
+        <div class="category-tabs" id="categoryTabs">
+          <button class="cat-tab active-cat" data-cat="all">all</button>
+          <button class="cat-tab" data-cat="favorites">⭐ favs</button>
+          <button class="cat-tab" data-cat="breakfast">☕ breakfast</button>
+          <button class="cat-tab" data-cat="meals">🥗 meals</button>
+          <button class="cat-tab" data-cat="snacks">🍎 snacks</button>
+          <button class="cat-tab" data-cat="drinks">🥤 drinks</button>
+        </div>
+        
+        <!-- quick picks container -->
+        <div id="quickPicksContainer" class="quick-select"></div>
+        
+        <!-- add new quick pick form (visible in edit mode) -->
+        <div id="addQuickRow" class="add-quick-row" style="display: none;">
+          <input type="text" id="newQuickDesc" placeholder="food name" value="">
+          <input type="number" id="newQuickCal" placeholder="calories" value="">
+          <select id="newQuickCat">
+            <option value="favorites">⭐ favorites</option>
+            <option value="breakfast">☕ breakfast</option>
+            <option value="meals">🥗 meals</option>
+            <option value="snacks">🍎 snacks</option>
+            <option value="drinks">🥤 drinks</option>
+          </select>
+          <button id="saveNewQuick">➕ add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GYM TAB CONTENT (hidden by default) -->
+  <div id="gymTabContent" class="hidden">
+    <!-- Day selector for gym - NOW OUTSIDE the panel like cal -->
+    <div class="day-strip" id="gymDayStrip"></div>
+    
+    <div class="gym-panel">
+      <div class="gym-header">
+        <span class="gym-title">💪 WORKOUTS FOR <span id="gymCurrentDay">MONDAY</span></span>
+        <span class="workout-streak" id="workoutStreakDisplay">💪 0 day streak</span>
       </div>
       
-      <!-- category tabs -->
-      <div class="category-tabs" id="categoryTabs">
-        <button class="cat-tab active-cat" data-cat="all">all</button>
-        <button class="cat-tab" data-cat="favorites">⭐ favs</button>
-        <button class="cat-tab" data-cat="breakfast">☕ breakfast</button>
-        <button class="cat-tab" data-cat="meals">🥗 meals</button>
-        <button class="cat-tab" data-cat="snacks">🍎 snacks</button>
-        <button class="cat-tab" data-cat="drinks">🥤 drinks</button>
+      <!-- Today's stats -->
+      <div class="today-stats">
+        <div class="today-stat">
+          <div class="today-stat-value" id="todayWorkoutCount">0</div>
+          <div class="today-stat-label">WORKOUTS</div>
+        </div>
+        <div class="today-stat">
+          <div class="today-stat-value" id="todayWorkoutXP">0</div>
+          <div class="today-stat-label">XP TODAY</div>
+        </div>
+        <div class="today-stat">
+          <div class="today-stat-value" id="todayWorkoutMins">0</div>
+          <div class="today-stat-label">TOTAL MINS</div>
+        </div>
       </div>
       
-      <!-- quick picks container -->
-      <div id="quickPicksContainer" class="quick-select"></div>
+      <!-- Workout log entries -->
+      <div class="workout-log">
+        <div class="workout-log-title">
+          <span>📋 LOGGED WORKOUTS</span>
+          <span>XP EARNED</span>
+        </div>
+        <div id="workoutListContainer"></div>
+      </div>
       
-      <!-- add new quick pick form (visible in edit mode) -->
-      <div id="addQuickRow" class="add-quick-row" style="display: none;">
-        <input type="text" id="newQuickDesc" placeholder="food name" value="">
-        <input type="number" id="newQuickCal" placeholder="calories" value="">
-        <select id="newQuickCat">
-          <option value="favorites">⭐ favorites</option>
-          <option value="breakfast">☕ breakfast</option>
-          <option value="meals">🥗 meals</option>
-          <option value="snacks">🍎 snacks</option>
-          <option value="drinks">🥤 drinks</option>
-        </select>
-        <button id="saveNewQuick">➕ add</button>
+      <!-- ACTION ROW - Export Week & Reset Week for GYM -->
+      <div class="action-row">
+        <button class="action-btn" id="exportWorkoutWeekBtn">📊 export week</button>
+        <button class="action-btn warning" id="resetWorkoutWeekBtn">🔄 reset week</button>
+      </div>
+      
+      <!-- add workout row -->
+      <div class="add-section">
+        <div class="flex-row">
+          <input type="text" id="workoutDescInput" placeholder="workout (e.g. treadmill)" value="">
+          <input type="number" id="workoutMinInput" placeholder="minutes" value="">
+          <button class="primary-btn" id="addWorkoutBtn">➕ add</button>
+        </div>
+
+        <!-- EDITABLE GYM PICKS SECTION -->
+        <div class="quick-picks-header">
+          <span class="quick-category">💪 my gym picks</span>
+          <button class="edit-toggle" id="editGymToggle">✏️ edit</button>
+        </div>
+        
+        <!-- gym category tabs -->
+        <div class="category-tabs" id="gymCategoryTabs">
+          <button class="cat-tab active-cat" data-cat="all">all</button>
+          <button class="cat-tab" data-cat="cardio">🚶 cardio</button>
+          <button class="cat-tab" data-cat="strength">🏋️ strength</button>
+          <button class="cat-tab" data-cat="recovery">🧘 recovery</button>
+        </div>
+        
+        <!-- gym picks container -->
+        <div id="gymPicksContainer" class="quick-select"></div>
+        
+        <!-- add new gym pick form (visible in edit mode) -->
+        <div id="addGymRow" class="add-quick-row" style="display: none;">
+          <input type="text" id="newGymDesc" placeholder="workout name" value="">
+          <input type="number" id="newGymMin" placeholder="default mins" value="30">
+          <select id="newGymCat">
+            <option value="cardio">🚶 cardio</option>
+            <option value="strength">🏋️ strength</option>
+            <option value="recovery">🧘 recovery</option>
+          </select>
+          <button id="saveNewGym">➕ add</button>
+        </div>
+        <div class="small-note" style="margin-top:0.5rem;">⏱️ XP = minutes × 0.5 (rounded)</div>
       </div>
     </div>
   </div>
@@ -881,21 +1160,29 @@
     const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
     const DAY_NAMES_CAPS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     let activeDay = 'monday';
+    let activeTab = 'cal'; // 'cal' or 'gym'
+    
     let foodData = {};
+    let workoutData = {};
     let quickPicks = [];
+    let gymPicks = [];
+    
     let currentCategory = 'all';
+    let currentGymCategory = 'all';
     let editMode = false;
+    let gymEditMode = false;
+    
     let currentGoal = 'maintain';
     let manualTarget = null;
     
     // GAMIFICATION STATE
     let streak = 0;
+    let workoutStreak = 0;
     let xp = 0;
     let level = 1;
     let badges = [];
     let lastLogDate = null;
-    let celebrationMessage = '';
-    let weeklyAwards = {};
+    let lastWorkoutDate = null;
 
     // Load ALL saved data
     try {
@@ -907,6 +1194,16 @@
         foodData = parsed;
       } else {
         DAYS.forEach(d => foodData[d] = []);
+      }
+      
+      // Load workout data
+      const storedWorkouts = localStorage.getItem('gf_workout_data');
+      if (storedWorkouts) {
+        const parsed = JSON.parse(storedWorkouts);
+        DAYS.forEach(d => { if (!parsed[d]) parsed[d] = []; });
+        workoutData = parsed;
+      } else {
+        DAYS.forEach(d => workoutData[d] = []);
       }
       
       // Load quick picks
@@ -937,6 +1234,28 @@
         ];
       }
       
+      // Load gym picks
+      const savedGymPicks = localStorage.getItem('gf_gym_picks');
+      if (savedGymPicks) {
+        gymPicks = JSON.parse(savedGymPicks);
+      } else {
+        // Default gym picks
+        gymPicks = [
+          { id: 'g1', desc: 'Treadmill Walk', mins: 30, cat: 'cardio', emoji: '🚶' },
+          { id: 'g2', desc: 'Treadmill Run', mins: 20, cat: 'cardio', emoji: '🏃' },
+          { id: 'g3', desc: 'Rower', mins: 20, cat: 'cardio', emoji: '🚣' },
+          { id: 'g4', desc: 'Exercise Bike', mins: 30, cat: 'cardio', emoji: '🚴' },
+          { id: 'g5', desc: 'Light Weights', mins: 30, cat: 'strength', emoji: '🏋️' },
+          { id: 'g6', desc: 'Heavy Weights', mins: 30, cat: 'strength', emoji: '💪' },
+          { id: 'g7', desc: 'Push Ups', mins: 10, cat: 'strength', emoji: '💪' },
+          { id: 'g8', desc: 'Pull Ups', mins: 10, cat: 'strength', emoji: '💪' },
+          { id: 'g9', desc: 'Squats', mins: 15, cat: 'strength', emoji: '🏋️' },
+          { id: 'g10', desc: 'Stretching', mins: 15, cat: 'recovery', emoji: '🧘' },
+          { id: 'g11', desc: 'Yoga', mins: 30, cat: 'recovery', emoji: '🧘' },
+          { id: 'g12', desc: 'Foam Rolling', mins: 15, cat: 'recovery', emoji: '🧘' }
+        ];
+      }
+      
       // Load profile data
       const savedProfile = localStorage.getItem('gf_profile');
       if (savedProfile) {
@@ -958,19 +1277,22 @@
       if (savedGame) {
         const game = JSON.parse(savedGame);
         streak = game.streak || 0;
+        workoutStreak = game.workoutStreak || 0;
         xp = game.xp || 0;
         level = game.level || 1;
-        badges = game.badges || [];
+        badges = game.badges || [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
         lastLogDate = game.lastLogDate ? new Date(game.lastLogDate) : null;
+        lastWorkoutDate = game.lastWorkoutDate ? new Date(game.lastWorkoutDate) : null;
       } else {
-        // Initialize with first badge
         badges = [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
       }
       
     } catch (e) {
       console.log('Error loading data:', e);
       DAYS.forEach(d => foodData[d] = []);
+      DAYS.forEach(d => workoutData[d] = []);
       quickPicks = [];
+      gymPicks = [];
     }
 
     // Profile elements
@@ -982,6 +1304,7 @@
     
     // Gamification elements
     const streakSpan = document.getElementById('streakCount');
+    const workoutStreakSpan = document.getElementById('workoutStreakCount');
     const badgeCountSpan = document.getElementById('badgeCount');
     const levelSpan = document.getElementById('levelDisplay');
     const xpCurrentSpan = document.getElementById('xpCurrent');
@@ -990,8 +1313,34 @@
     const badgesContainer = document.getElementById('badgesContainer');
     const celebrationDiv = document.getElementById('celebrationMessage');
     const weeklyAwardsDiv = document.getElementById('weeklyAwards');
+    
+    // Tab elements
+    const calTabBtn = document.getElementById('calTabBtn');
+    const gymTabBtn = document.getElementById('gymTabBtn');
+    const calTabContent = document.getElementById('calTabContent');
+    const gymTabContent = document.getElementById('gymTabContent');
 
-    // Save profile to localStorage
+    // Tab switching
+    calTabBtn.addEventListener('click', () => {
+      activeTab = 'cal';
+      calTabBtn.classList.add('active');
+      gymTabBtn.classList.remove('active');
+      calTabContent.classList.remove('hidden');
+      gymTabContent.classList.add('hidden');
+    });
+    
+    gymTabBtn.addEventListener('click', () => {
+      activeTab = 'gym';
+      gymTabBtn.classList.add('active');
+      calTabBtn.classList.remove('active');
+      gymTabContent.classList.remove('hidden');
+      calTabContent.classList.add('hidden');
+      renderGymDayButtons();
+      renderWorkoutTab();
+      renderGymPicks();
+    });
+
+    // Save functions
     function saveProfile() {
       const profile = {
         age: ageInput.value,
@@ -1003,16 +1352,38 @@
       localStorage.setItem('gf_profile', JSON.stringify(profile));
     }
     
-    // Save gamification data
     function saveGamification() {
       const game = {
         streak: streak,
+        workoutStreak: workoutStreak,
         xp: xp,
         level: level,
         badges: badges,
-        lastLogDate: lastLogDate ? lastLogDate.toISOString() : null
+        lastLogDate: lastLogDate ? lastLogDate.toISOString() : null,
+        lastWorkoutDate: lastWorkoutDate ? lastWorkoutDate.toISOString() : null
       };
       localStorage.setItem('gf_gamification', JSON.stringify(game));
+    }
+    
+    function saveWorkoutData() {
+      localStorage.setItem('gf_workout_data', JSON.stringify(workoutData));
+    }
+    
+    function saveFoodData() {
+      localStorage.setItem('gf_food_data', JSON.stringify(foodData));
+    }
+    
+    function saveQuickPicks() {
+      localStorage.setItem('gf_quick_picks', JSON.stringify(quickPicks));
+    }
+    
+    function saveGymPicks() {
+      localStorage.setItem('gf_gym_picks', JSON.stringify(gymPicks));
+    }
+
+    // Calculate XP from minutes (0.5 XP per minute, rounded)
+    function calculateXP(minutes) {
+      return Math.round(minutes * 0.5);
     }
 
     // Calculate BMR and target based on goal
@@ -1048,12 +1419,12 @@
     // Update gamification UI
     function updateGamificationUI() {
       streakSpan.innerText = streak;
+      workoutStreakSpan.innerText = workoutStreak;
       
       const unlockedCount = badges.filter(b => b.unlocked).length;
       badgeCountSpan.innerText = unlockedCount;
       levelSpan.innerText = level;
       
-      // XP calculation (level * 100 for next level)
       const xpForNextLevel = level * 100;
       xpCurrentSpan.innerText = `${xp} XP`;
       xpNextSpan.innerText = `${xpForNextLevel} XP`;
@@ -1061,10 +1432,8 @@
       const xpPercent = (xp / xpForNextLevel) * 100;
       xpBar.style.width = `${Math.min(xpPercent, 100)}%`;
       
-      // Render badges
       renderBadges();
       
-      // Check for level up
       if (xp >= xpForNextLevel) {
         level++;
         xp = 0;
@@ -1076,10 +1445,7 @@
     // Render badges
     function renderBadges() {
       badgesContainer.innerHTML = '';
-      
-      // Show first 5 badges (most recent/relevant)
       const displayBadges = badges.slice(0, 5);
-      
       displayBadges.forEach(badge => {
         const badgeEl = document.createElement('span');
         badgeEl.className = `badge ${badge.unlocked ? 'unlocked' : 'locked'}`;
@@ -1088,43 +1454,32 @@
       });
     }
     
-    // Check and update streak
-    function checkStreak() {
+    // Check workout streak
+    function checkWorkoutStreak() {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       
-      if (!lastLogDate) {
-        // First time logging
-        streak = 1;
-        showCelebration('🎯 First log! Streak started! 🔥', 'streak');
+      if (!lastWorkoutDate) {
+        workoutStreak = 1;
+        showCelebration('💪 First workout! Streak started!', 'workout');
       } else {
-        const last = new Date(lastLogDate);
+        const last = new Date(lastWorkoutDate);
         last.setHours(0, 0, 0, 0);
         
         const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
         
         if (diffDays === 1) {
-          // Consecutive day
-          streak++;
-          if (streak === 7) {
-            showCelebration('⚡ 7 DAY STREAK! You\'re on fire!', 'streak');
-            checkBadge('on_fire');
-          } else if (streak === 14) {
-            showCelebration('💪 14 DAY STREAK! Unstoppable!', 'streak');
-            checkBadge('unstoppable');
-          } else if (streak === 30) {
-            showCelebration('👑 30 DAY STREAK! STREAK QUEEN!', 'streak');
-            checkBadge('streak_queen');
+          workoutStreak++;
+          if (workoutStreak === 7) {
+            showCelebration('🔥 7 DAY WORKOUT STREAK! Crushing it!', 'workout');
+            checkBadge('gym_rat');
           }
         } else if (diffDays > 1) {
-          // Streak broken
-          streak = 1;
-          showCelebration('🔄 Fresh start! New streak begins!', 'streak');
+          workoutStreak = 1;
         }
-        // diffDays === 0 means already logged today, do nothing
       }
       
-      lastLogDate = new Date();
+      lastWorkoutDate = new Date();
       saveGamification();
       updateGamificationUI();
     }
@@ -1133,11 +1488,10 @@
     function addXP(amount, source) {
       xp += amount;
       
-      // Random celebration based on source
       const messages = {
         meal: ['+10 XP! Keep logging!', '📝 Meal logged!', '+10 XP towards next level!'],
+        workout: ['💪 Workout logged! +XP!', '🏋️ Crushed it! +XP!', '🔥 Extra XP for moving!'],
         goal: ['🎯 GOAL HIT! +50 XP!', '💥 Perfect day! +50 XP!', '✨ Target smashed! +50 XP!'],
-        streak: ['🔥 Streak bonus!', '⚡ Extra XP for consistency!'],
         badge: ['🏆 BADGE UNLOCKED! +50 XP!', '🎉 Achievement earned! +50 XP!']
       };
       
@@ -1159,7 +1513,10 @@
         streak_queen: { name: '👑 Streak Queen', xp: 200 },
         week_warrior: { name: '🌟 Week Warrior', xp: 100 },
         perfect_week: { name: '🎯 Perfect Week', xp: 150 },
-        foodie: { name: '🥗 Foodie', xp: 50 }
+        foodie: { name: '🥗 Foodie', xp: 50 },
+        gym_rat: { name: '🏋️ Gym Rat', xp: 100 },
+        runner: { name: '🏃 Runner', xp: 75 },
+        strong: { name: '💪 Strong', xp: 100 }
       };
       
       const badge = badges.find(b => b.id === badgeId);
@@ -1172,89 +1529,231 @@
     
     // Show celebration message
     function showCelebration(message, type) {
-      celebrationMessage = message;
       celebrationDiv.style.display = 'block';
       celebrationDiv.innerHTML = message;
-      
-      // Auto hide after 3 seconds
       setTimeout(() => {
         celebrationDiv.style.display = 'none';
       }, 3000);
     }
     
-    // Calculate weekly awards
-    function calculateWeeklyAwards() {
-      const target = computeTarget();
-      const weekTotals = {};
-      let bestDay = null;
-      let bestDayScore = Infinity;
-      let mostAccurate = null;
-      let accuracyScore = Infinity;
-      let totalDeficit = 0;
-      let daysLogged = 0;
+    // Render gym day buttons (SAME STYLE AS CAL, now outside panel)
+    function renderGymDayButtons() {
+      const gymDayStrip = document.getElementById('gymDayStrip');
+      if (!gymDayStrip) return;
       
-      DAYS.forEach((day, index) => {
-        const entries = foodData[day] || [];
-        const total = entries.reduce((sum, e) => sum + (Number(e.cal) || 0), 0);
-        weekTotals[day] = total;
-        
-        if (entries.length > 0) {
-          daysLogged++;
-          totalDeficit += target - total;
-          
-          // Find best day (closest to target without going over? or just closest)
-          const diff = Math.abs(total - target);
-          if (diff < bestDayScore) {
-            bestDayScore = diff;
-            bestDay = DAY_NAMES_CAPS[index];
-          }
-          
-          // Most accurate (closest to target)
-          if (diff < accuracyScore) {
-            accuracyScore = diff;
-            mostAccurate = DAY_NAMES_CAPS[index];
-          }
-        }
+      gymDayStrip.innerHTML = '';
+      DAYS.forEach(day => {
+        const btn = document.createElement('button');
+        btn.className = `day-btn ${day === activeDay ? 'active' : ''}`;
+        btn.innerText = day.slice(0,3);
+        btn.dataset.day = day;
+        btn.addEventListener('click', () => {
+          activeDay = day;
+          renderGymDayButtons();
+          renderWorkoutTab();
+          renderDayButtons(); // Update cal tab's active day
+        });
+        gymDayStrip.appendChild(btn);
       });
+    }
+    
+    // Render workout tab
+    function renderWorkoutTab() {
+      const today = activeDay;
+      const workouts = workoutData[today] || [];
       
-      // Check for week warrior badge (all days logged)
-      if (daysLogged === 7) {
-        checkBadge('week_warrior');
-      }
+      document.getElementById('gymCurrentDay').innerText = activeDay.toUpperCase();
+      document.getElementById('workoutStreakDisplay').innerHTML = `💪 ${workoutStreak} day streak`;
       
-      // Check for perfect week (all days on target)
-      const perfectWeek = DAYS.every(day => {
-        const total = weekTotals[day] || 0;
-        return Math.abs(total - target) <= 50; // Within 50 cal
-      });
+      const todayWorkouts = workouts.length;
+      const todayXP = workouts.reduce((sum, w) => sum + (w.xp || 0), 0);
+      const todayMins = workouts.reduce((sum, w) => sum + (w.duration || 0), 0);
       
-      if (perfectWeek) {
-        checkBadge('perfect_week');
-      }
+      document.getElementById('todayWorkoutCount').innerText = todayWorkouts;
+      document.getElementById('todayWorkoutXP').innerText = todayXP;
+      document.getElementById('todayWorkoutMins').innerText = todayMins;
       
-      // Display awards
-      if (daysLogged > 0) {
-        weeklyAwardsDiv.style.display = 'block';
-        weeklyAwardsDiv.innerHTML = `
-          <div class="awards-title">🏆 WEEKLY AWARDS</div>
-          <div class="award-item">
-            <span class="award-icon">👑</span>
-            <span class="award-text">Best Day: <span class="award-highlight">${bestDay || 'None'}</span></span>
-          </div>
-          <div class="award-item">
-            <span class="award-icon">🎯</span>
-            <span class="award-text">Most Accurate: <span class="award-highlight">${mostAccurate || 'None'}</span></span>
-          </div>
-          <div class="award-item">
-            <span class="award-icon">📉</span>
-            <span class="award-text">Avg Deficit: <span class="award-highlight">${Math.round(totalDeficit / daysLogged)} cal</span></span>
-          </div>
-        `;
+      const container = document.getElementById('workoutListContainer');
+      container.innerHTML = '';
+      
+      if (workouts.length === 0) {
+        container.innerHTML = '<div style="padding: 1rem; text-align: center; color:#777;">💪 add your first workout</div>';
       } else {
-        weeklyAwardsDiv.style.display = 'none';
+        workouts.forEach((workout, idx) => {
+          const entryDiv = document.createElement('div');
+          entryDiv.className = 'workout-entry';
+          entryDiv.innerHTML = `
+            <span class="workout-desc">${workout.emoji || '💪'} ${workout.name} ${workout.duration}min</span>
+            <span class="workout-xp">+${workout.xp} XP</span>
+            <button class="workout-remove" data-index="${idx}" data-day="${today}">✕</button>
+          `;
+          container.appendChild(entryDiv);
+        });
+        
+        container.querySelectorAll('.workout-remove').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const idx = btn.dataset.index;
+            const day = btn.dataset.day;
+            if (workoutData[day] && workoutData[day][idx]) {
+              workoutData[day].splice(idx, 1);
+              saveWorkoutData();
+              renderWorkoutTab();
+            }
+          });
+        });
       }
     }
+    
+    // Manual workout add
+    document.getElementById('addWorkoutBtn')?.addEventListener('click', () => {
+      const desc = document.getElementById('workoutDescInput').value.trim();
+      const mins = parseInt(document.getElementById('workoutMinInput').value, 10);
+      
+      if (!desc || isNaN(mins) || mins < 1) {
+        alert('please enter a workout name and valid minutes');
+        return;
+      }
+      
+      const xpGained = calculateXP(mins);
+      
+      if (!workoutData[activeDay]) workoutData[activeDay] = [];
+      workoutData[activeDay].push({
+        name: desc,
+        duration: mins,
+        xp: xpGained,
+        emoji: '💪',
+        type: 'custom',
+        timestamp: new Date().toISOString()
+      });
+      
+      saveWorkoutData();
+      addXP(xpGained, 'workout');
+      checkWorkoutStreak();
+      
+      document.getElementById('workoutDescInput').value = '';
+      document.getElementById('workoutMinInput').value = '';
+      renderWorkoutTab();
+    });
+    
+    // Render gym picks (like quick picks)
+    function renderGymPicks() {
+      const container = document.getElementById('gymPicksContainer');
+      if (!container) return;
+      
+      container.className = `quick-select ${gymEditMode ? 'edit-mode' : ''}`;
+      
+      let filtered = gymPicks;
+      if (currentGymCategory !== 'all') {
+        filtered = gymPicks.filter(p => p.cat === currentGymCategory);
+      }
+      
+      container.innerHTML = '';
+      filtered.forEach(pick => {
+        const xp = calculateXP(pick.mins);
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'quick-item';
+        itemDiv.innerHTML = `
+          <button class="quick-btn" data-gym='${JSON.stringify(pick).replace(/'/g, "&apos;")}'>${pick.emoji || '💪'} ${pick.desc} ${pick.mins}min (${xp}xp)</button>
+          <button class="delete-quick" data-id="${pick.id}">✕</button>
+        `;
+        container.appendChild(itemDiv);
+      });
+      
+      container.querySelectorAll('.quick-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (gymEditMode) return;
+          try {
+            const pick = JSON.parse(btn.dataset.gym);
+            const xpGained = calculateXP(pick.mins);
+            
+            if (!workoutData[activeDay]) workoutData[activeDay] = [];
+            workoutData[activeDay].push({
+              name: pick.desc,
+              duration: pick.mins,
+              xp: xpGained,
+              emoji: pick.emoji || '💪',
+              type: pick.cat,
+              timestamp: new Date().toISOString()
+            });
+            
+            saveWorkoutData();
+            addXP(xpGained, 'workout');
+            checkWorkoutStreak();
+            renderWorkoutTab();
+          } catch (e) {
+            console.error('Error parsing workout data:', e);
+          }
+        });
+      });
+      
+      container.querySelectorAll('.delete-quick').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          gymPicks = gymPicks.filter(p => p.id !== id);
+          saveGymPicks();
+          renderGymPicks();
+        });
+      });
+    }
 
+    // Gym edit mode toggle
+    const editGymToggle = document.getElementById('editGymToggle');
+    const addGymRow = document.getElementById('addGymRow');
+    
+    editGymToggle?.addEventListener('click', () => {
+      gymEditMode = !gymEditMode;
+      editGymToggle.classList.toggle('active', gymEditMode);
+      addGymRow.style.display = gymEditMode ? 'flex' : 'none';
+      renderGymPicks();
+    });
+
+    // Add new gym pick
+    document.getElementById('saveNewGym')?.addEventListener('click', () => {
+      const desc = document.getElementById('newGymDesc').value.trim();
+      const mins = parseInt(document.getElementById('newGymMin').value, 10);
+      const cat = document.getElementById('newGymCat').value;
+      
+      if (!desc || isNaN(mins) || mins < 1) {
+        alert('Please enter a valid workout name and minutes');
+        return;
+      }
+      
+      const emoji = {
+        cardio: '🚶',
+        strength: '🏋️',
+        recovery: '🧘'
+      }[cat] || '💪';
+      
+      const newPick = {
+        id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
+        desc: desc,
+        mins: mins,
+        cat: cat,
+        emoji: emoji
+      };
+      
+      gymPicks.push(newPick);
+      saveGymPicks();
+      
+      document.getElementById('newGymDesc').value = '';
+      document.getElementById('newGymMin').value = '30';
+      
+      renderGymPicks();
+    });
+
+    // Gym category tabs
+    document.querySelectorAll('#gymCategoryTabs .cat-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('#gymCategoryTabs .cat-tab').forEach(t => t.classList.remove('active-cat'));
+        tab.classList.add('active-cat');
+        currentGymCategory = tab.dataset.cat;
+        renderGymPicks();
+      });
+    });
+
+    // Update suggestion text
     function updateSuggestion() {
       const age = parseInt(ageInput.value, 10) || 28;
       const weight = parseInt(weightInput.value, 10) || 60;
@@ -1303,20 +1802,6 @@
       suggestionText.innerHTML = suggestion;
     }
 
-    function getTodayTotal() {
-      const entries = foodData[activeDay] || [];
-      return entries.reduce((acc, e) => acc + (Number(e.cal) || 0), 0);
-    }
-
-    function updateTargetUI() {
-      const val = computeTarget();
-      targetSpan.innerText = val;
-      updateSuggestion();
-      renderActiveDay();
-      calculateWeeklyAwards();
-      saveProfile();
-    }
-
     // Goal button handlers
     document.querySelectorAll('.goal-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1350,16 +1835,7 @@
       }
     });
 
-    // Save functions
-    function saveFoodData() {
-      localStorage.setItem('gf_food_data', JSON.stringify(foodData));
-    }
-    
-    function saveQuickPicks() {
-      localStorage.setItem('gf_quick_picks', JSON.stringify(quickPicks));
-    }
-
-    // EXPORT WEEK FUNCTION
+    // EXPORT WEEK FUNCTION for FOOD
     function exportWeekAsText() {
       const target = computeTarget();
       const today = new Date();
@@ -1370,57 +1846,112 @@
       
       const dateStr = `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
       
-      let weekSummary = `📊 WEEKLY SUMMARY (${dateStr})\n\n`;
+      let weekSummary = `📊 FOOD WEEKLY SUMMARY (${dateStr})\n\n`;
+      weekSummary += `🔥 FOOD STREAK: ${streak} days\n`;
+      weekSummary += `💪 WORKOUT STREAK: ${workoutStreak} days\n`;
+      weekSummary += `👑 LEVEL: ${level} (${xp} XP)\n\n`;
+      
       let weekTotal = 0;
       let daysTracked = 0;
       
       DAYS.forEach((day, index) => {
         const entries = foodData[day] || [];
         const dayTotal = entries.reduce((sum, e) => sum + (Number(e.cal) || 0), 0);
+        
         weekTotal += dayTotal;
         if (entries.length > 0) daysTracked++;
         
-        weekSummary += `${DAY_NAMES_CAPS[index]} - ${dayTotal}/${target} cal\n`;
+        weekSummary += `\n${DAY_NAMES_CAPS[index]}:\n`;
+        weekSummary += `  🍽️ Food: ${dayTotal}/${target} cal\n`;
         
         if (entries.length > 0) {
           entries.forEach(entry => {
-            weekSummary += `  • ${entry.desc} ${entry.cal}\n`;
+            weekSummary += `    • ${entry.desc}: ${entry.cal} cal\n`;
           });
         } else {
-          weekSummary += `  • no entries\n`;
+          weekSummary += `    • no meals logged\n`;
         }
-        weekSummary += `\n`;
       });
       
       const avgDaily = daysTracked > 0 ? Math.round(weekTotal / daysTracked) : 0;
-      weekSummary += `✨ WEEK TOTALS:\n`;
-      weekSummary += `• Total: ${weekTotal} cal\n`;
-      weekSummary += `• Daily avg: ${avgDaily} cal\n`;
+      weekSummary += `\n✨ WEEK TOTALS:\n`;
+      weekSummary += `• Total calories: ${weekTotal}\n`;
+      weekSummary += `• Daily average: ${avgDaily}\n`;
       weekSummary += `• Days tracked: ${daysTracked}/7\n`;
-      weekSummary += `• Current streak: ${streak} days 🔥\n`;
-      weekSummary += `• Level: ${level} (${xp} XP)\n`;
-      weekSummary += `• Badges: ${badges.filter(b => b.unlocked).length} unlocked\n`;
-      
-      if (currentGoal === 'lose') {
-        const deficit = target - avgDaily;
-        const weeklyLoss = Math.round(deficit * 7 / 7700 * 10) / 10;
-        weekSummary += `• Est. weight change: ${weeklyLoss > 0 ? '📉 -' : '📈 +'}${Math.abs(weeklyLoss)}kg/week\n`;
-      }
       
       const blob = new Blob([weekSummary], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `week_${weekStart.toISOString().slice(0,10)}.txt`;
+      a.download = `food_week_${weekStart.toISOString().slice(0,10)}.txt`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       
-      alert('Week exported! Check your downloads folder.');
+      alert('Food week exported! Check your downloads folder.');
     }
 
-    // RESET WEEK FUNCTION
+    // EXPORT WEEK FUNCTION for WORKOUTS
+    function exportWorkoutWeekAsText() {
+      const today = new Date();
+      const weekStart = new Date(today);
+      weekStart.setDate(today.getDate() - today.getDay() + 1);
+      const weekEnd = new Date(today);
+      weekEnd.setDate(today.getDate() - today.getDay() + 7);
+      
+      const dateStr = `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
+      
+      let weekSummary = `💪 WORKOUT WEEKLY SUMMARY (${dateStr})\n\n`;
+      weekSummary += `💪 WORKOUT STREAK: ${workoutStreak} days\n`;
+      weekSummary += `🔥 FOOD STREAK: ${streak} days\n`;
+      weekSummary += `👑 LEVEL: ${level} (${xp} XP)\n\n`;
+      
+      let weekTotalXP = 0;
+      let weekTotalMins = 0;
+      let daysWorkedOut = 0;
+      
+      DAYS.forEach((day, index) => {
+        const workouts = workoutData[day] || [];
+        const dayXP = workouts.reduce((sum, w) => sum + (w.xp || 0), 0);
+        const dayMins = workouts.reduce((sum, w) => sum + (w.duration || 0), 0);
+        
+        weekTotalXP += dayXP;
+        weekTotalMins += dayMins;
+        if (workouts.length > 0) daysWorkedOut++;
+        
+        weekSummary += `\n${DAY_NAMES_CAPS[index]}:\n`;
+        weekSummary += `  💪 Workouts: ${workouts.length}\n`;
+        weekSummary += `  ⏱️ Total mins: ${dayMins}\n`;
+        weekSummary += `  ✨ XP earned: ${dayXP}\n`;
+        
+        if (workouts.length > 0) {
+          workouts.forEach(workout => {
+            weekSummary += `    • ${workout.emoji || '💪'} ${workout.name}: ${workout.duration}min (+${workout.xp} XP)\n`;
+          });
+        }
+      });
+      
+      weekSummary += `\n✨ WEEK TOTALS:\n`;
+      weekSummary += `• Total workouts: ${daysWorkedOut}/7 days\n`;
+      weekSummary += `• Total minutes: ${weekTotalMins}\n`;
+      weekSummary += `• Total XP earned: ${weekTotalXP}\n`;
+      weekSummary += `• Avg XP per workout: ${daysWorkedOut > 0 ? Math.round(weekTotalXP / daysWorkedOut) : 0}\n`;
+      
+      const blob = new Blob([weekSummary], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `workout_week_${weekStart.toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      alert('Workout week exported! Check your downloads folder.');
+    }
+
+    // RESET WEEK FUNCTION for FOOD
     function resetWeek() {
       if (confirm('⚠️ This will delete ALL food entries for the entire week. Are you sure?')) {
         DAYS.forEach(day => {
@@ -1429,12 +1960,24 @@
         saveFoodData();
         renderActiveDay();
         renderDayButtons();
-        calculateWeeklyAwards();
-        alert('Week reset! Ready for a fresh start ✨');
+        alert('Food week reset! Ready for a fresh start ✨');
       }
     }
 
-    // Render day buttons
+    // RESET WEEK FUNCTION for WORKOUTS
+    function resetWorkoutWeek() {
+      if (confirm('⚠️ This will delete ALL workout entries for the entire week. Are you sure?')) {
+        DAYS.forEach(day => {
+          workoutData[day] = [];
+        });
+        saveWorkoutData();
+        renderWorkoutTab();
+        renderGymDayButtons();
+        alert('Workout week reset! Ready to crush new goals 💪');
+      }
+    }
+
+    // Render day buttons for calories tab
     const dayStrip = document.getElementById('dayStrip');
     function renderDayButtons() {
       dayStrip.innerHTML = '';
@@ -1447,12 +1990,13 @@
           activeDay = day;
           renderDayButtons();
           renderActiveDay();
+          renderGymDayButtons();
         });
         dayStrip.appendChild(btn);
       });
     }
 
-    // Render active day panel
+    // Render active day panel for calories
     const foodListDiv = document.getElementById('foodListContainer');
     const currentDayNameSpan = document.getElementById('currentDayName');
     const currentDayTotalSpan = document.getElementById('currentDayTotal');
@@ -1474,13 +2018,6 @@
       } else {
         remainingText = `⚠️ ${Math.abs(remaining)} over`;
         remainingSpan.className = `remaining over`;
-      }
-      
-      const weeklyChange = Math.round(Math.abs(remaining) * 7 / 7700 * 10) / 10;
-      if (currentGoal === 'lose' && remaining < 0) {
-        remainingText += ` (📈 +${weeklyChange}kg/week)`;
-      } else if (currentGoal === 'lose' && remaining > 0) {
-        remainingText += ` (📉 ~${weeklyChange}kg/week)`;
       }
       
       remainingSpan.innerHTML = remainingText;
@@ -1509,8 +2046,6 @@
               foodData[day].splice(idx, 1);
               saveFoodData();
               renderActiveDay();
-              updateSuggestion();
-              calculateWeeklyAwards();
               renderDayButtons();
             }
           });
@@ -1518,7 +2053,7 @@
       }
     }
 
-    // Render quick picks
+    // Render quick picks for food
     function renderQuickPicks() {
       const container = document.getElementById('quickPicksContainer');
       container.className = `quick-select ${editMode ? 'edit-mode' : ''}`;
@@ -1550,12 +2085,7 @@
             foodData[activeDay].push({ desc, cal });
             saveFoodData();
             renderActiveDay();
-            updateSuggestion();
-            
-            // Add XP for logging meal
             addXP(10, 'meal');
-            
-            // Check for first log badge
             if (!badges.find(b => b.id === 'first_step')?.unlocked) {
               checkBadge('first_step');
             }
@@ -1574,7 +2104,7 @@
       });
     }
 
-    // Edit mode toggle
+    // Food edit mode toggle
     const editToggle = document.getElementById('editQuickToggle');
     const addQuickRow = document.getElementById('addQuickRow');
     
@@ -1585,7 +2115,7 @@
       renderQuickPicks();
     });
 
-    // Add new quick pick
+    // Add new food quick pick
     document.getElementById('saveNewQuick').addEventListener('click', () => {
       const desc = document.getElementById('newQuickDesc').value.trim();
       const cal = parseInt(document.getElementById('newQuickCal').value, 10);
@@ -1612,17 +2142,17 @@
       renderQuickPicks();
     });
 
-    // Category tabs
-    document.querySelectorAll('.cat-tab').forEach(tab => {
+    // Food category tabs
+    document.querySelectorAll('#categoryTabs .cat-tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active-cat'));
+        document.querySelectorAll('#categoryTabs .cat-tab').forEach(t => t.classList.remove('active-cat'));
         tab.classList.add('active-cat');
         currentCategory = tab.dataset.cat;
         renderQuickPicks();
       });
     });
 
-    // Manual add
+    // Manual food add
     const descInput = document.getElementById('foodDescInput');
     const calInput = document.getElementById('foodCalInput');
     const addBtn = document.getElementById('addFoodBtn');
@@ -1640,12 +2170,7 @@
       descInput.value = '';
       calInput.value = '';
       renderActiveDay();
-      updateSuggestion();
-      
-      // Add XP for logging meal
       addXP(10, 'meal');
-      
-      // Check for first log badge
       if (!badges.find(b => b.id === 'first_step')?.unlocked) {
         checkBadge('first_step');
       }
@@ -1659,17 +2184,19 @@
       });
     }
 
-    // Export week button
+    // Export buttons
     document.getElementById('exportWeekBtn').addEventListener('click', exportWeekAsText);
-
-    // Reset week button
     document.getElementById('resetWeekBtn').addEventListener('click', resetWeek);
+    document.getElementById('exportWorkoutWeekBtn').addEventListener('click', exportWorkoutWeekAsText);
+    document.getElementById('resetWorkoutWeekBtn').addEventListener('click', resetWorkoutWeek);
 
     // Full export
     document.getElementById('exportBtn').addEventListener('click', () => {
       const exportObj = {
         foodData: foodData,
+        workoutData: workoutData,
         quickPicks: quickPicks,
+        gymPicks: gymPicks,
         profile: {
           age: ageInput.value,
           height: heightInput.value,
@@ -1679,10 +2206,12 @@
         },
         gamification: {
           streak: streak,
+          workoutStreak: workoutStreak,
           xp: xp,
           level: level,
           badges: badges,
-          lastLogDate: lastLogDate ? lastLogDate.toISOString() : null
+          lastLogDate: lastLogDate ? lastLogDate.toISOString() : null,
+          lastWorkoutDate: lastWorkoutDate ? lastWorkoutDate.toISOString() : null
         }
       };
       const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
@@ -1713,9 +2242,22 @@
             });
             foodData = newData;
             
+            if (imported.workoutData) {
+              const newWorkoutData = {};
+              DAYS.forEach(day => {
+                newWorkoutData[day] = Array.isArray(imported.workoutData[day]) ? imported.workoutData[day] : [];
+              });
+              workoutData = newWorkoutData;
+            }
+            
             if (imported.quickPicks) {
               quickPicks = imported.quickPicks;
               saveQuickPicks();
+            }
+            
+            if (imported.gymPicks) {
+              gymPicks = imported.gymPicks;
+              saveGymPicks();
             }
             
             if (imported.profile) {
@@ -1735,21 +2277,28 @@
             
             if (imported.gamification) {
               streak = imported.gamification.streak || 0;
+              workoutStreak = imported.gamification.workoutStreak || 0;
               xp = imported.gamification.xp || 0;
               level = imported.gamification.level || 1;
               badges = imported.gamification.badges || [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
               lastLogDate = imported.gamification.lastLogDate ? new Date(imported.gamification.lastLogDate) : null;
+              lastWorkoutDate = imported.gamification.lastWorkoutDate ? new Date(imported.gamification.lastWorkoutDate) : null;
             }
             
             saveFoodData();
+            saveWorkoutData();
             saveProfile();
             saveGamification();
+            saveQuickPicks();
+            saveGymPicks();
             updateGamificationUI();
             updateTargetUI();
             renderActiveDay();
             renderDayButtons();
             renderQuickPicks();
-            calculateWeeklyAwards();
+            renderGymDayButtons();
+            renderGymPicks();
+            if (activeTab === 'gym') renderWorkoutTab();
           } else {
             alert('file does not contain valid food data');
           }
@@ -1776,11 +2325,12 @@
     });
     
     renderDayButtons();
+    renderGymDayButtons();
     if (!foodData[activeDay]) foodData[activeDay] = [];
     updateTargetUI();
     renderQuickPicks();
+    renderGymPicks();
     updateGamificationUI();
-    calculateWeeklyAwards();
   })();
 </script>
 </body>
