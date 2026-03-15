@@ -1185,114 +1185,122 @@
     let lastWorkoutDate = null;
 
     // Load ALL saved data
-    try {
-      // Load food entries
-      const stored = localStorage.getItem('gf_food_data');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        DAYS.forEach(d => { if (!parsed[d]) parsed[d] = []; });
-        foodData = parsed;
-      } else {
+    function loadAllData() {
+      try {
+        // Load food entries
+        const stored = localStorage.getItem('gf_food_data');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          DAYS.forEach(d => { if (!parsed[d]) parsed[d] = []; });
+          foodData = parsed;
+        } else {
+          DAYS.forEach(d => foodData[d] = []);
+        }
+        
+        // Load workout data
+        const storedWorkouts = localStorage.getItem('gf_workout_data');
+        if (storedWorkouts) {
+          const parsed = JSON.parse(storedWorkouts);
+          DAYS.forEach(d => { if (!parsed[d]) parsed[d] = []; });
+          workoutData = parsed;
+        } else {
+          DAYS.forEach(d => workoutData[d] = []);
+        }
+        
+        // Load quick picks
+        const savedQuick = localStorage.getItem('gf_quick_picks');
+        if (savedQuick) {
+          quickPicks = JSON.parse(savedQuick);
+        } else {
+          // Default quick picks
+          quickPicks = [
+            { id: '1', desc: 'coffee black', cal: 5, cat: 'breakfast' },
+            { id: '2', desc: 'coffee w/ milk', cal: 35, cat: 'breakfast' },
+            { id: '3', desc: 'latte', cal: 120, cat: 'breakfast' },
+            { id: '4', desc: 'toast butter', cal: 140, cat: 'breakfast' },
+            { id: '5', desc: 'oatmeal', cal: 160, cat: 'breakfast' },
+            { id: '6', desc: 'yogurt', cal: 120, cat: 'breakfast' },
+            { id: '7', desc: 'banana', cal: 105, cat: 'favorites' },
+            { id: '8', desc: 'apple', cal: 95, cat: 'favorites' },
+            { id: '9', desc: 'chicken breast', cal: 165, cat: 'meals' },
+            { id: '10', desc: 'salad', cal: 120, cat: 'meals' },
+            { id: '11', desc: 'pasta', cal: 380, cat: 'meals' },
+            { id: '12', desc: 'eggs (2)', cal: 140, cat: 'meals' },
+            { id: '13', desc: 'almonds', cal: 170, cat: 'snacks' },
+            { id: '14', desc: 'dark chocolate', cal: 170, cat: 'snacks' },
+            { id: '15', desc: 'protein bar', cal: 220, cat: 'snacks' },
+            { id: '16', desc: 'water', cal: 0, cat: 'drinks' },
+            { id: '17', desc: 'coke', cal: 140, cat: 'drinks' },
+            { id: '18', desc: 'wine', cal: 125, cat: 'drinks' }
+          ];
+        }
+        
+        // Load gym picks
+        const savedGymPicks = localStorage.getItem('gf_gym_picks');
+        if (savedGymPicks) {
+          gymPicks = JSON.parse(savedGymPicks);
+        } else {
+          // Default gym picks
+          gymPicks = [
+            { id: 'g1', desc: 'Treadmill Walk', mins: 30, cat: 'cardio', emoji: '🚶' },
+            { id: 'g2', desc: 'Treadmill Run', mins: 20, cat: 'cardio', emoji: '🏃' },
+            { id: 'g3', desc: 'Rower', mins: 20, cat: 'cardio', emoji: '🚣' },
+            { id: 'g4', desc: 'Exercise Bike', mins: 30, cat: 'cardio', emoji: '🚴' },
+            { id: 'g5', desc: 'Light Weights', mins: 30, cat: 'strength', emoji: '🏋️' },
+            { id: 'g6', desc: 'Heavy Weights', mins: 30, cat: 'strength', emoji: '💪' },
+            { id: 'g7', desc: 'Push Ups', mins: 10, cat: 'strength', emoji: '💪' },
+            { id: 'g8', desc: 'Pull Ups', mins: 10, cat: 'strength', emoji: '💪' },
+            { id: 'g9', desc: 'Squats', mins: 15, cat: 'strength', emoji: '🏋️' },
+            { id: 'g10', desc: 'Stretching', mins: 15, cat: 'recovery', emoji: '🧘' },
+            { id: 'g11', desc: 'Yoga', mins: 30, cat: 'recovery', emoji: '🧘' },
+            { id: 'g12', desc: 'Foam Rolling', mins: 15, cat: 'recovery', emoji: '🧘' }
+          ];
+        }
+        
+        // Load profile data
+        const savedProfile = localStorage.getItem('gf_profile');
+        if (savedProfile) {
+          const profile = JSON.parse(savedProfile);
+          
+          const ageInput = document.getElementById('ageInput');
+          const heightInput = document.getElementById('heightInput');
+          const weightInput = document.getElementById('weightInput');
+          
+          if (profile.age) ageInput.value = profile.age;
+          if (profile.height) heightInput.value = profile.height;
+          if (profile.weight) weightInput.value = profile.weight;
+          if (profile.goal) {
+            currentGoal = profile.goal;
+            // Update active goal button
+            document.querySelectorAll('.goal-btn').forEach(btn => {
+              btn.classList.toggle('active', btn.dataset.goal === currentGoal);
+            });
+          }
+          if (profile.manualTarget) manualTarget = profile.manualTarget;
+        }
+        
+        // Load gamification data
+        const savedGame = localStorage.getItem('gf_gamification');
+        if (savedGame) {
+          const game = JSON.parse(savedGame);
+          streak = game.streak || 0;
+          workoutStreak = game.workoutStreak || 0;
+          xp = game.xp || 0;
+          level = game.level || 1;
+          badges = game.badges || [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
+          lastLogDate = game.lastLogDate ? new Date(game.lastLogDate) : null;
+          lastWorkoutDate = game.lastWorkoutDate ? new Date(game.lastWorkoutDate) : null;
+        } else {
+          badges = [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
+        }
+        
+      } catch (e) {
+        console.log('Error loading data:', e);
         DAYS.forEach(d => foodData[d] = []);
-      }
-      
-      // Load workout data
-      const storedWorkouts = localStorage.getItem('gf_workout_data');
-      if (storedWorkouts) {
-        const parsed = JSON.parse(storedWorkouts);
-        DAYS.forEach(d => { if (!parsed[d]) parsed[d] = []; });
-        workoutData = parsed;
-      } else {
         DAYS.forEach(d => workoutData[d] = []);
+        quickPicks = [];
+        gymPicks = [];
       }
-      
-      // Load quick picks
-      const savedQuick = localStorage.getItem('gf_quick_picks');
-      if (savedQuick) {
-        quickPicks = JSON.parse(savedQuick);
-      } else {
-        // Default quick picks
-        quickPicks = [
-          { id: '1', desc: 'coffee black', cal: 5, cat: 'breakfast' },
-          { id: '2', desc: 'coffee w/ milk', cal: 35, cat: 'breakfast' },
-          { id: '3', desc: 'latte', cal: 120, cat: 'breakfast' },
-          { id: '4', desc: 'toast butter', cal: 140, cat: 'breakfast' },
-          { id: '5', desc: 'oatmeal', cal: 160, cat: 'breakfast' },
-          { id: '6', desc: 'yogurt', cal: 120, cat: 'breakfast' },
-          { id: '7', desc: 'banana', cal: 105, cat: 'favorites' },
-          { id: '8', desc: 'apple', cal: 95, cat: 'favorites' },
-          { id: '9', desc: 'chicken breast', cal: 165, cat: 'meals' },
-          { id: '10', desc: 'salad', cal: 120, cat: 'meals' },
-          { id: '11', desc: 'pasta', cal: 380, cat: 'meals' },
-          { id: '12', desc: 'eggs (2)', cal: 140, cat: 'meals' },
-          { id: '13', desc: 'almonds', cal: 170, cat: 'snacks' },
-          { id: '14', desc: 'dark chocolate', cal: 170, cat: 'snacks' },
-          { id: '15', desc: 'protein bar', cal: 220, cat: 'snacks' },
-          { id: '16', desc: 'water', cal: 0, cat: 'drinks' },
-          { id: '17', desc: 'coke', cal: 140, cat: 'drinks' },
-          { id: '18', desc: 'wine', cal: 125, cat: 'drinks' }
-        ];
-      }
-      
-      // Load gym picks
-      const savedGymPicks = localStorage.getItem('gf_gym_picks');
-      if (savedGymPicks) {
-        gymPicks = JSON.parse(savedGymPicks);
-      } else {
-        // Default gym picks
-        gymPicks = [
-          { id: 'g1', desc: 'Treadmill Walk', mins: 30, cat: 'cardio', emoji: '🚶' },
-          { id: 'g2', desc: 'Treadmill Run', mins: 20, cat: 'cardio', emoji: '🏃' },
-          { id: 'g3', desc: 'Rower', mins: 20, cat: 'cardio', emoji: '🚣' },
-          { id: 'g4', desc: 'Exercise Bike', mins: 30, cat: 'cardio', emoji: '🚴' },
-          { id: 'g5', desc: 'Light Weights', mins: 30, cat: 'strength', emoji: '🏋️' },
-          { id: 'g6', desc: 'Heavy Weights', mins: 30, cat: 'strength', emoji: '💪' },
-          { id: 'g7', desc: 'Push Ups', mins: 10, cat: 'strength', emoji: '💪' },
-          { id: 'g8', desc: 'Pull Ups', mins: 10, cat: 'strength', emoji: '💪' },
-          { id: 'g9', desc: 'Squats', mins: 15, cat: 'strength', emoji: '🏋️' },
-          { id: 'g10', desc: 'Stretching', mins: 15, cat: 'recovery', emoji: '🧘' },
-          { id: 'g11', desc: 'Yoga', mins: 30, cat: 'recovery', emoji: '🧘' },
-          { id: 'g12', desc: 'Foam Rolling', mins: 15, cat: 'recovery', emoji: '🧘' }
-        ];
-      }
-      
-      // Load profile data
-      const savedProfile = localStorage.getItem('gf_profile');
-      if (savedProfile) {
-        const profile = JSON.parse(savedProfile);
-        
-        const ageInput = document.getElementById('ageInput');
-        const heightInput = document.getElementById('heightInput');
-        const weightInput = document.getElementById('weightInput');
-        
-        if (profile.age) ageInput.value = profile.age;
-        if (profile.height) heightInput.value = profile.height;
-        if (profile.weight) weightInput.value = profile.weight;
-        if (profile.goal) currentGoal = profile.goal;
-        if (profile.manualTarget) manualTarget = profile.manualTarget;
-      }
-      
-      // Load gamification data
-      const savedGame = localStorage.getItem('gf_gamification');
-      if (savedGame) {
-        const game = JSON.parse(savedGame);
-        streak = game.streak || 0;
-        workoutStreak = game.workoutStreak || 0;
-        xp = game.xp || 0;
-        level = game.level || 1;
-        badges = game.badges || [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
-        lastLogDate = game.lastLogDate ? new Date(game.lastLogDate) : null;
-        lastWorkoutDate = game.lastWorkoutDate ? new Date(game.lastWorkoutDate) : null;
-      } else {
-        badges = [{ id: 'first_step', name: '🥉 First Step', unlocked: false }];
-      }
-      
-    } catch (e) {
-      console.log('Error loading data:', e);
-      DAYS.forEach(d => foodData[d] = []);
-      DAYS.forEach(d => workoutData[d] = []);
-      quickPicks = [];
-      gymPicks = [];
     }
 
     // Profile elements
@@ -1319,6 +1327,9 @@
     const gymTabBtn = document.getElementById('gymTabBtn');
     const calTabContent = document.getElementById('calTabContent');
     const gymTabContent = document.getElementById('gymTabContent');
+
+    // Load all data on start
+    loadAllData();
 
     // Tab switching
     calTabBtn.addEventListener('click', () => {
@@ -1414,6 +1425,15 @@
       }
       
       return target;
+    }
+
+    // Update target UI
+    function updateTargetUI() {
+      const val = computeTarget();
+      targetSpan.innerText = val;
+      updateSuggestion();
+      renderActiveDay();
+      saveProfile();
     }
 
     // Update gamification UI
@@ -1524,6 +1544,7 @@
         badge.unlocked = true;
         showCelebration(`🏆 BADGE UNLOCKED: ${badge.name}!`, 'badge');
         addXP(badgeConfig[badgeId].xp, 'badge');
+        saveGamification();
       }
     }
     
@@ -1536,7 +1557,7 @@
       }, 3000);
     }
     
-    // Render gym day buttons (SAME STYLE AS CAL, now outside panel)
+    // Render gym day buttons
     function renderGymDayButtons() {
       const gymDayStrip = document.getElementById('gymDayStrip');
       if (!gymDayStrip) return;
@@ -1551,7 +1572,7 @@
           activeDay = day;
           renderGymDayButtons();
           renderWorkoutTab();
-          renderDayButtons(); // Update cal tab's active day
+          renderDayButtons();
         });
         gymDayStrip.appendChild(btn);
       });
@@ -1636,7 +1657,7 @@
       renderWorkoutTab();
     });
     
-    // Render gym picks (like quick picks)
+    // Render gym picks
     function renderGymPicks() {
       const container = document.getElementById('gymPicksContainer');
       if (!container) return;
@@ -1810,11 +1831,8 @@
         currentGoal = btn.dataset.goal;
         manualTarget = null;
         updateTargetUI();
+        saveProfile();
       });
-      
-      if (btn.dataset.goal === currentGoal) {
-        btn.classList.add('active');
-      }
     });
 
     // Manual target edit
@@ -1832,6 +1850,7 @@
           }
         }
         updateTargetUI();
+        saveProfile();
       }
     });
 
@@ -2310,7 +2329,7 @@
       reader.readAsText(file);
     });
 
-    // Initialize
+    // Initialize with input event listeners
     ageInput.addEventListener('input', () => {
       updateTargetUI();
       saveProfile();
@@ -2324,6 +2343,7 @@
       saveProfile();
     });
     
+    // Initial render
     renderDayButtons();
     renderGymDayButtons();
     if (!foodData[activeDay]) foodData[activeDay] = [];
